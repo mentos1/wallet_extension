@@ -23,8 +23,8 @@ app.set('port', port);
 
 
 var options = {
-    key: fs.readFileSync(process.env.KEY, 'utf8'),
-    cert: fs.readFileSync(process.env.CERT, 'utf8')
+    key: fs.readFileSync(process.env.CERT, 'utf8'),
+    cert: fs.readFileSync(process.env.KEY, 'utf8')
 };
 console.log(options);
 
