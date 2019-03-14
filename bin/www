@@ -13,8 +13,8 @@ var fs = require('fs');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+/*var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);*/
 
 /**
  * Create HTTP server.
@@ -40,7 +40,7 @@ server_http.listen(80);
 server_http.on('error', onError);
 server_http.on('listening', onListening(server_http));
 
-server_https.listen(port);
+server_https.listen(process.env.PORT);
 server_https.on('error', onError);
 server_https.on('listening', onListening(server_https));
 
