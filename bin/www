@@ -19,8 +19,8 @@ app.set('port', port);
  * Create HTTP server.
  */
 var options = {
-    key: fs.readFileSync(process.env.KEY),
-    cert: fs.readFileSync(process.env.CERT)
+    key: fs.readFileSync(process.env.KEY, 'utf8'),
+    cert: fs.readFileSync(process.env.CERT, 'utf8')
 };
 
 var server = https.createServer(options, app);
