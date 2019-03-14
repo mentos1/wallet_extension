@@ -6,7 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('wallet-extension:server');
-var http = require('http');
+//var http = require('http');
 var https = require('https');
 var fs = require('fs');
 /**
@@ -29,16 +29,16 @@ var options = {
 console.log(options);
 
 
-var server_http = http.createServer(app);
+//var server_http = http.createServer(app);
 var server_https = https.createServer(options, app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server_http.listen(80);
+/*server_http.listen(80);
 server_http.on('error', onError);
-server_http.on('listening', onListening);
+server_http.on('listening', onListening);*/
 
 server_https.listen(port);
 server_https.on('error', onError);
