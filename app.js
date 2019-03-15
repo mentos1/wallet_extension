@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth_twitter', auth_twitter);
-app.use('/users', auth_vk);
+app.use('/auth_vk', auth_vk);
 app.use('/check', check);
 
 // catch 404 and forward to error handler
