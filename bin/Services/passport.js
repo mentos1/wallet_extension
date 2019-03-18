@@ -1,8 +1,7 @@
 'use strict';
 
 var passport = require('passport'),
-    TwitterTokenStrategy = require('passport-twitter-token'),
-    twitterConfig = require('./twitter.config.js');
+    TwitterTokenStrategy = require('passport-twitter-token');
 
 module.exports = function () {
 
