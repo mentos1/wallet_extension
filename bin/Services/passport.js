@@ -8,7 +8,8 @@ module.exports = function () {
     passport.use(new TwitterTokenStrategy({
             consumerKey: process.env.TWITTER_KEY,
             consumerSecret: process.env.TWITTER_SECRET,
-            includeEmail: true
+            includeEmail: true,
+            callbackURL: "https://wallet.primecore.io/check"
         },
         function (token, tokenSecret, profile, done) {
             console.log(token, tokenSecret, profile, done);
