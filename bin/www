@@ -32,6 +32,7 @@ var options = {
 
 var server_http = http.createServer(app);
 var server_https = https.createServer(options, app);
+var passportConfig = require('./Services/passport');
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -46,6 +47,8 @@ server_https.on('error', onError);
 server_https.on('listening', async () => {
     console.log('start listen server port :' + process.env.PORT);
     connection = await conn.createConn();
+
+    passportConfig();
 });
 
 
