@@ -35,11 +35,11 @@ router.get('/', (req, res, next) => {
         req.body['oauth_token'] = parsedBody.oauth_token;
         req.body['oauth_token_secret'] = parsedBody.oauth_token_secret;
         req.body['user_id'] = parsedBody.user_id;
-
+        console.error('b next');
         return next();
     });
 }, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
-    console.log('passport.authenticate');
+    console.error('after next');
 
     if (!req.user) {
         return res.send(401, 'User Not Authenticated');
@@ -49,6 +49,7 @@ router.get('/', (req, res, next) => {
     req.auth = {
         id: req.user.id
     };
+    console.error('2');
 
     return next();
 }, Token.generateToken, Token.sendToken);
