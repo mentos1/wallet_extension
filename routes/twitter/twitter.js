@@ -1,8 +1,7 @@
 const express = require('express');
 let router = express.Router();
 const passport = require('passport');
-
-import {generateToken, sendToken} from '../../bin/Services/token';
+const Token = require('../../bin/Services/token');
 
 /* GET users listing. */
 router.post((req, res, next) => {
@@ -39,6 +38,6 @@ router.post((req, res, next) => {
     };
 
     return next();
-}, generateToken, sendToken);
+}, Token.generateToken, Token.sendToken);
 
 module.exports = router;
