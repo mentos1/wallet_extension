@@ -2,7 +2,6 @@
 
 var passport = require('passport'),
     TwitterTokenStrategy = require('passport-twitter-token'),
-    User = require('mongoose').model('User'),
     twitterConfig = require('./twitter.config.js');
 
 module.exports = function () {
@@ -13,9 +12,7 @@ module.exports = function () {
             includeEmail: true
         },
         function (token, tokenSecret, profile, done) {
-            User.upsertTwitterUser(token, tokenSecret, profile, function(err, user) {
-                return done(err, user);
-            });
+            console.log(token, tokenSecret, profile, done);
         }));
 
 };
