@@ -40,10 +40,11 @@ router.get('/', (req, res, next) => {
         req.body['oauth_token_secret'] = parsedBody.oauth_token_secret;
         req.body['user_id'] = parsedBody.user_id;
 
-        res.send('____________send');
         next();
     });
-}/*, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
+}, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
+    console.log('passport.authenticate');
+
     if (!req.user) {
         return res.send(401, 'User Not Authenticated');
     }
@@ -54,6 +55,6 @@ router.get('/', (req, res, next) => {
     };
 
     return next();
-}, Token.generateToken, Token.sendToken*/);
+}, Token.generateToken, Token.sendToken);
 
 module.exports = router;
