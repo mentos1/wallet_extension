@@ -3,8 +3,9 @@ let router = express.Router();
 const passport = require('passport');
 const Token = require('../../bin/Services/token');
 const request = require('request');
-import {UserRepositories} from '../../bin/Repositories/index'
-import {user} from '../../bin/Request/index'
+const {UserRepositories} = require('../../bin/Repositories/index');
+const {user} = require('../../bin/Request/index');
+
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
