@@ -6,15 +6,15 @@ const request = require('request');
 
 /* GET users listing. */
 router.post('/', (req, res, next) => {
-    console.log(req.query);
+    console.log(req.body);
     request.post({
         url: `https://api.twitter.com/oauth/access_token?oauth_verifier`,
         oauth: {
             consumer_key: process.env.TWITTER_KEY,
             consumer_secret: process.env.TWITTER_SECRET,
-            token: req.query.oauth_token
+            token: req.body.oauth_token
         },
-        form: { oauth_verifier: req.query.oauth_verifier }
+        form: { oauth_verifier: req.body.oauth_verifier }
     }, function (err, r, body) {
         if (err) {
             return res.send(500, { message: err.message });
