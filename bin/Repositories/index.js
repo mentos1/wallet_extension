@@ -1,3 +1,3 @@
-var UserRepositories = require('./User');
+const UserRepositories = require('./User');
 
 module.exports = {UserRepositories};
