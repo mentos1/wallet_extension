@@ -19,7 +19,9 @@ router.post('/', (req, res, next) => {
             return res.send(500, { message: err.message });
         }
 
+        console.log(body);
         const bodyString = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
+        console.log(bodyString);
         const parsedBody = JSON.parse(bodyString);
 
         req.body['oauth_token'] = parsedBody.oauth_token;
