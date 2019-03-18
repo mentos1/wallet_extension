@@ -1,3 +1,3 @@
-import * as UserRepositories from './User';
+var UserRepositories = require('./User');
 
 module.exports = {UserRepositories};

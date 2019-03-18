@@ -1,3 +1,3 @@
-import * as user from './User';
+var user = require('./User');
 
 module.exports = {user};
