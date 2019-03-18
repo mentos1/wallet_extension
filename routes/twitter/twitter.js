@@ -3,6 +3,8 @@ let router = express.Router();
 const passport = require('passport');
 const Token = require('../../bin/Services/token');
 const request = require('request');
+import {UserRepositories} from '../../bin/Repositories/index'
+import {user} from '../../bin/Request/index'
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
@@ -35,6 +37,18 @@ router.get('/', (req, res, next) => {
         req.body['oauth_token'] = parsedBody.oauth_token;
         req.body['oauth_token_secret'] = parsedBody.oauth_token_secret;
         req.body['user_id'] = parsedBody.user_id;
+
+        const isValid = user.isValid_Twitter(parsedBody);
+
+        if (isValid.status) {
+            if (UserRepositories.has(parsedBody.user_id)) {
+                UserRepositories.create(parsedBody);
+            } else {
+                return parsedBody;
+            }
+        } else {
+            res.send(isValid)
+        }
 
         next();
     });
