@@ -20,11 +20,7 @@ router.get('/', (req, res, next) => {
             return res.send(500, { message: err.message });
         }
 
-        //console.log(body);
         const bodyString = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
-        console.log('_____________________________________BODY____________________________________--');
-        console.log(bodyString);
-        console.log('_____________________________________/BODY____________________________________--');
 
         /*
         * {
@@ -40,7 +36,7 @@ router.get('/', (req, res, next) => {
         req.body['oauth_token_secret'] = parsedBody.oauth_token_secret;
         req.body['user_id'] = parsedBody.user_id;
 
-        next();
+        return next();
     });
 }, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
     console.log('passport.authenticate');
