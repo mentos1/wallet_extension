@@ -9,7 +9,7 @@ module.exports = function () {
             consumerKey: process.env.TWITTER_KEY,
             consumerSecret: process.env.TWITTER_SECRET,
             includeEmail: true,
-            callbackURL: "https://wallet.primecore.io/check"
+            callbackURL: "https://wallet.primecore.io/auth_twitter"
         },
         function (token, tokenSecret, profile, done) {
             console.log(token, tokenSecret, profile, done);
