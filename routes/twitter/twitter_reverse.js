@@ -18,6 +18,7 @@ router.post('/', function(req, res) {
 
 
         var jsonStr = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
+        console.log(jsonStr);
         res.send(JSON.parse(jsonStr));
     });
 });
