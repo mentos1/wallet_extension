@@ -38,7 +38,7 @@ router.get('/', (req, res, next) => {
 
         next();
     });
-}, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
+}, function(req, res, next) {
     console.error('after next');
 
     if (!req.user) {
