@@ -20,9 +20,9 @@ router.get('/', (req, res, next) => {
             return res.send(500, { message: err.message });
         }
 
-        console.log(body);
+        //console.log(body);
         const bodyString = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
-        console.log(bodyString);
+        //console.log(bodyString);
 
         /*
         * {
