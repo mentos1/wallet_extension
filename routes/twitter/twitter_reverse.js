@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const twitterConfig = require('../../bin/Services/twitter.config');
 
 /* GET users listing. */
 router.post(function(req, res) {
@@ -8,8 +7,8 @@ router.post(function(req, res) {
         url: 'https://api.twitter.com/oauth/request_token',
         oauth: {
             oauth_callback: "http%3A%2F%2Flocalhost%3A3000%2Ftwitter-callback",
-            consumer_key: twitterConfig.consumerKey,
-            consumer_secret: twitterConfig.consumerSecret
+            consumer_key: process.env.TWITTER_KEY,
+            consumer_secret: process.env.TWITTER_SECRET
         }
     }, function (err, r, body) {
         if (err) {

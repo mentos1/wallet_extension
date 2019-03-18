@@ -25,6 +25,9 @@ module.exports = {
                 KEY  : '/path/to/key.pem',
                 CERT  : '/path/to/cert.pem',
 
+                TWITTER_KEY  : '',
+                TWITTER_SECRET  : '',
+
                 API_KEY_SPARKPOST   : '8cf4811bac642...'
             },
             exec_mode: "cluster",
