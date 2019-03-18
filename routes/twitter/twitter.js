@@ -23,6 +23,15 @@ router.get('/', (req, res, next) => {
         console.log(body);
         const bodyString = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
         console.log(bodyString);
+
+        /*
+        * {
+        *   "oauth_token": "1083652953083396098-zGRIf0iqwqr5qTlaPCeJuhypqnWrFu",
+        *   "oauth_token_secret": "HiWuwJDsChNwy7fCaA8sxGfi7n9DK1JUiljTCTY2GqTkq",
+        *   "user_id": "1083652953083396098",
+        *   "screen_name": "Artem82994509"
+        * }
+        * */
         const parsedBody = JSON.parse(bodyString);
 
         req.body['oauth_token'] = parsedBody.oauth_token;
@@ -31,7 +40,7 @@ router.get('/', (req, res, next) => {
 
         next();
     });
-}, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
+}/*, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
     if (!req.user) {
         return res.send(401, 'User Not Authenticated');
     }
@@ -42,6 +51,6 @@ router.get('/', (req, res, next) => {
     };
 
     return next();
-}, Token.generateToken, Token.sendToken);
+}, Token.generateToken, Token.sendToken*/);
 
 module.exports = router;
