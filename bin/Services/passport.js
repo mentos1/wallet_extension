@@ -8,8 +8,8 @@ var passport = require('passport'),
 module.exports = function () {
 
     passport.use(new TwitterTokenStrategy({
-            consumerKey: twitterConfig.consumerKey,
-            consumerSecret: twitterConfig.consumerSecret,
+            consumerKey: process.env.TWITTER_KEY,
+            consumerSecret: process.env.TWITTER_SECRET,
             includeEmail: true
         },
         function (token, tokenSecret, profile, done) {

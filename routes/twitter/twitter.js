@@ -2,14 +2,15 @@ const express = require('express');
 let router = express.Router();
 const passport = require('passport');
 const Token = require('../../bin/Services/token');
+const request = require('request');
 
 /* GET users listing. */
 router.post('/', (req, res, next) => {
     request.post({
         url: `https://api.twitter.com/oauth/access_token?oauth_verifier`,
         oauth: {
-            consumer_key: twitterConfig.consumerKey,
-            consumer_secret: twitterConfig.consumerSecret,
+            consumer_key: process.env.TWITTER_KEY,
+            consumer_secret: process.env.TWITTER_SECRET,
             token: req.query.oauth_token
         },
         form: { oauth_verifier: req.query.oauth_verifier }
