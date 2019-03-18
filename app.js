@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var auth_twitter = require('./routes/auth_twitter');
+//var auth_twitter = require('./routes/auth_twitter');
 var auth_vk = require('./routes/auth_vk');
 var check = require('./routes/check');
 var twitter = require('./routes/twitter/twitter');

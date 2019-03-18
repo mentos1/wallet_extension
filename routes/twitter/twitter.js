@@ -22,7 +22,9 @@ router.get('/', (req, res, next) => {
 
         //console.log(body);
         const bodyString = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
-        //console.log(bodyString);
+        console.log('_____________________________________BODY____________________________________--');
+        console.log(bodyString);
+        console.log('_____________________________________/BODY____________________________________--');
 
         /*
         * {
@@ -38,6 +40,7 @@ router.get('/', (req, res, next) => {
         req.body['oauth_token_secret'] = parsedBody.oauth_token_secret;
         req.body['user_id'] = parsedBody.user_id;
 
+        res.send('____________send');
         next();
     });
 }/*, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
