@@ -1,0 +1,10 @@
+const status = {
+    CREATED         : 0,
+    SENT            : 1,
+    PENDING_MONITOR : 2,
+    MONITORING      : 3,
+    DUPLICATED      : 4
+};
+
+
+module.exports.getStatus = status;
