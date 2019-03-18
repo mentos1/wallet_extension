@@ -32,4 +32,6 @@ var authenticate = expressJwt({
     }
 });
 
+console.log(authenticate);
+
 module.exports = {generateToken, sendToken, authenticate}

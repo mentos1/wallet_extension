@@ -35,7 +35,6 @@ router.get('/', (req, res, next) => {
         req.body['oauth_token'] = parsedBody.oauth_token;
         req.body['oauth_token_secret'] = parsedBody.oauth_token_secret;
         req.body['user_id'] = parsedBody.user_id;
-        console.error('b next');
         return next();
     });
 }, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
