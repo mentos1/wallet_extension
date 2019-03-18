@@ -5,7 +5,7 @@ const Token = require('../../bin/Services/token');
 const request = require('request');
 
 /* GET users listing. */
-router.post('/', (req, res, next) => {
+router.get('/', (req, res, next) => {
     console.log(req.query);
     request.post({
         url: `https://api.twitter.com/oauth/access_token?oauth_verifier`,
