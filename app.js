@@ -7,6 +7,9 @@ var logger = require('morgan');
 var auth_twitter = require('./routes/auth_twitter');
 var auth_vk = require('./routes/auth_vk');
 var check = require('./routes/check');
+var twitter = require('./routes/twitter/twitter');
+var twitter_reverse = require('./routes/twitter/twitter_reverse');
+
 const cors = require('cors');
 var app = express();
 
@@ -23,6 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth_twitter', auth_twitter);
 app.use('/auth_vk', auth_vk);
 app.use('/check', check);
+app.use('/auth/twitter', twitter);
+app.use('/auth/twitter/reverse', twitter_reverse);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
