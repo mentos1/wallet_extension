@@ -42,15 +42,27 @@ router.get('/', (req, res, next) => {
         const isValid = user.isValid_Twitter(parsedBody);
 
         if (isValid.status) {
-            if (UserRepositories.has(parsedBody.user_id)) {
+            if (!UserRepositories.has(parsedBody.user_id)) {
                 UserRepositories.create(parsedBody);
-            } else {
-                return parsedBody;
             }
+
+            return res.send(200, parsedBody);
         } else {
-            res.send(isValid)
+            return res.send(401, isValid);
         }
     });
-});
+}/*, function(req, res, next) {
+    if (!req.user) {
+        return res.send(401, 'User Not Authenticated');
+    }
+
+    // prepare token for API
+    req.auth = {
+        id: req.user.id
+    };
+    console.error('2');
+
+    return next();
+}, Token.generateToken, Token.sendToken*/);
 
 module.exports = router;
