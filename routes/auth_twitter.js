@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-import {user} from '../bin/Request';
-import {UserRepositories} from '../bin/Repositories';
+const {user} = require('../bin/Request/index');
+const {UserRepositories} = require('../bin/Repositories/index');
 
 /* GET users listing. */
 router.post('/', function(req, res, next) {
