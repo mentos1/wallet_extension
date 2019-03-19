@@ -12,12 +12,12 @@ module.exports = function () {
             includeEmail: true,
             callbackURL: "https://wallet.primecore.io/auth_twitter"
         },
-        function (token, tokenSecret, profile, done) {
+        async function (token, tokenSecret, profile, done) {
             if (!UserRepositories.has(profile.id)) {
                 UserRepositories.create(profile);
             }
 
-            let user = UserRepositories.findByTwitterId(profile.id);
+            let user = await UserRepositories.findByTwitterId(profile.id);
             let err = null;
             console.log('_______________________---');
             console.log(user);
