@@ -9,7 +9,7 @@ const {user} = require('../../bin/Request/index');
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
-    console.error('EROOOR');
+    return res.send(200, { message: '2sss' });
     request.post({
         url: `https://api.twitter.com/oauth/access_token?oauth_verifier`,
         oauth: {
