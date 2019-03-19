@@ -17,7 +17,8 @@ module.exports = function () {
                 UserRepositories.create(profile);
             }
 
-            let user = UserRepositories.findByTwiterId(profile.id), err = null;
+            let user = UserRepositories.findByTwiterId(profile.id);
+            let err = null;
             console.log('_______________________---');
             console.log(user);
             console.log('_______________________---');
