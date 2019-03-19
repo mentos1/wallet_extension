@@ -28,7 +28,7 @@ var send = function (req, res) {
 
     console.log(p.json('&'));*/
 
-    return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/?id' + 1);
+    return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/');
 };
 
 //token handling middleware
