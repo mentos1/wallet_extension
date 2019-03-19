@@ -19,7 +19,15 @@ var generate = function (req, res, next) {
 var send = function (req, res) {
     res.setHeader('x-auth-token', req.token);
     //return res.status(200).send(JSON.stringify(req.user));
-    return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/');
+    let p = [];
+
+    for (var prop in req.user) {
+        p.push(prop + "=" + req.user[prop]);
+    }
+
+    console.log(p.join('&'));
+
+    return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/?' + p.join('&'));
 };
 
 //token handling middleware
