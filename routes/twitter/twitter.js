@@ -10,6 +10,7 @@ const {user} = require('../../bin/Request/index');
 /* GET users listing. */
 router.get('/', (req, res, next) => {
     console.log(req.query);
+    return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/');
     request.post({
         url: `https://api.twitter.com/oauth/access_token?oauth_verifier`,
         oauth: {
@@ -22,7 +23,6 @@ router.get('/', (req, res, next) => {
         if (err) {
             return res.send(500, { message: err.message });
         }
-        return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/');
         const bodyString = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
 
         /*
