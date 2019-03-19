@@ -11,11 +11,14 @@ async function create(body) {
     array.push(new Date());
 
     try {
-        await connection.execute(
+        let response = await connection.execute(
             sql,
             array
         );
 
+        console.error('___________-response_________________')
+        console.log(response)
+        console.error('___________-response_________________')
         return true;
     } catch (e) {
         console.log('Error insert : ', e);
