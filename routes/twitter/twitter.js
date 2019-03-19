@@ -50,23 +50,7 @@ router.get('/', (req, res, next) => {
         } else {
             res.send(isValid)
         }
-
-        next();
     });
-}, function(req, res, next) {
-    console.error('after next');
-
-    if (!req.user) {
-        return res.send(401, 'User Not Authenticated');
-    }
-
-    // prepare token for API
-    req.auth = {
-        id: req.user.id
-    };
-    console.error('2');
-
-    return next();
-}, Token.generateToken, Token.sendToken);
+});
 
 module.exports = router;
