@@ -4,12 +4,16 @@ let connection;
 async function create(body) {
     connection = await conn.getConn();
 
-    const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`) VALUES (?,?,?,?)';
+    const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`, `created_at`, `updated_at`) VALUES (?,?,?,?,?,?)';
+
+    let array = Object.values(body);
+    array.push(new Date());
+    array.push(new Date());
 
     try {
         await connection.execute(
             sql,
-            Object.values(body)
+            array
         );
 
         return true;
