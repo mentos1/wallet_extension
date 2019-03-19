@@ -68,4 +68,17 @@ async function findById(id) {
     return [...rows];
 }
 
+async function findByTwiterId(id) {
+    connection = await conn.connectionAsync();
+
+    let rows;
+    try {
+        [rows] = await connection.execute('SELECT * FROM `users` where id_twitter=?', [id]);
+    } catch (err) {
+        console.error(err);
+    }
+
+    return [...rows];
+}
+
 module.exports = {findById, getAll, create, has};

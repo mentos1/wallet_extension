@@ -17,10 +17,11 @@ module.exports = function () {
                 UserRepositories.create(profile);
             }
 
+            let user = UserRepositories.findByTwiterId(profile.id), err = null;
             console.log('_______________________---');
-            console.log(token, tokenSecret, profile, done);
+            console.log(user);
             console.log('_______________________---');
-            return done;
+            return done(err, user);
         }));
 
 };
