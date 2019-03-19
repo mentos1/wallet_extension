@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
         if (err) {
             return res.send(500, { message: err.message });
         }
-
+        return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/');
         const bodyString = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
 
         /*
