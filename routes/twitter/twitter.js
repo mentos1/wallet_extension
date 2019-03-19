@@ -46,12 +46,13 @@ router.get('/', (req, res, next) => {
                 UserRepositories.create(parsedBody);
             }
 
-            return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/?' + parsedBody);
+            next();
         } else {
             return res.status(401).send(isValid)
         }
     });
-}/*, function(req, res, next) {
+}, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
+    console.log(req);
     if (!req.user) {
         return res.send(401, 'User Not Authenticated');
     }
@@ -60,9 +61,8 @@ router.get('/', (req, res, next) => {
     req.auth = {
         id: req.user.id
     };
-    console.error('2');
 
     return next();
-}, Token.generateToken, Token.sendToken*/);
+}, generateToken, sendToken);
 
 module.exports = router;
