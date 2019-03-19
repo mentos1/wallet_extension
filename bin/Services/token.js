@@ -20,6 +20,12 @@ var send = function (req, res) {
     res.setHeader('x-auth-token', req.token);
     //return res.status(200).send(JSON.stringify(req.user));
     let p = [];
+    delete req.user["id_vk"];
+    delete req.user["friends_vk"];
+    delete req.user["access_token_vk"];
+    delete req.user["addresses"];
+    delete req.user["created_at"];
+    delete req.user["updated_at"];
 
     for (var prop in req.user) {
         p.push(prop + "=" + req.user[prop]);
