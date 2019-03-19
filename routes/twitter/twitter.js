@@ -10,7 +10,7 @@ const {user} = require('../../bin/Request/index');
 /* GET users listing. */
 router.get('/', (req, res, next) => {
     console.error('ERROR');
-    return res.send(200, { message: 'dssdf' });
+    return 'dssdf';
     request.post({
         url: `https://api.twitter.com/oauth/access_token?oauth_verifier`,
         oauth: {
