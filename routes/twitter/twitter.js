@@ -46,7 +46,7 @@ router.get('/', (req, res, next) => {
                 UserRepositories.create(parsedBody);
             }
 
-            return res.send(200);
+            return res.send(401);
         } else {
             return res.send(401, isValid);
         }
