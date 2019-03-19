@@ -63,6 +63,6 @@ router.get('/', (req, res, next) => {
     };
 
     return next();
-}, generateToken, sendToken);
+}, Token.generate, Token.send);
 
 module.exports = router;

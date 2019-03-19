@@ -10,12 +10,12 @@ var createToken = function (auth) {
         });
 };
 
-var generateToken = function (req, res, next) {
+var generate = function (req, res, next) {
     req.token = createToken(req.auth);
     return next();
 };
 
-var sendToken = function (req, res) {
+var send = function (req, res) {
     res.setHeader('x-auth-token', req.token);
     return res.status(200).send(JSON.stringify(req.user));
 };
@@ -32,4 +32,4 @@ var authenticate = expressJwt({
     }
 });
 
-module.exports = {generateToken, sendToken}
+module.exports = {generate, send}
