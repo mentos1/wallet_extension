@@ -46,8 +46,7 @@ router.get('/', (req, res, next) => {
                 UserRepositories.create(parsedBody);
             }
 
-
-            return res.status(200).send(body);
+            return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/?' + parsedBody);
         } else {
             return res.status(401).send(isValid)
         }
