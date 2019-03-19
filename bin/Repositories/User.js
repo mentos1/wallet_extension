@@ -42,7 +42,7 @@ async function has(id) {
 }
 
 async function getAll() {
-    connection = await conn.connectionAsync();
+    connection = await conn.getConn();
 
     let rows;
     try {
@@ -56,7 +56,7 @@ async function getAll() {
 }
 
 async function findById(id) {
-    connection = await conn.connectionAsync();
+    connection = await conn.getConn();
 
     let rows;
     try {
@@ -69,7 +69,7 @@ async function findById(id) {
 }
 
 async function findByTwitterId(id) {
-    connection = await conn.connectionAsync();
+    connection = await conn.getConn();
 
     let rows;
     try {

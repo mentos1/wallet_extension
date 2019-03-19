@@ -47,7 +47,6 @@ server_https.on('error', onError);
 server_https.on('listening', async () => {
     console.log('start listen server port :' + process.env.PORT);
     connection = await conn.createConn();
-
     passportConfig();
 });
 
