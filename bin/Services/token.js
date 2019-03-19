@@ -33,7 +33,7 @@ var send = function (req, res) {
 
     console.log(p.join('&'));
 
-    return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/?' + p.join('&'));
+    return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/');
 };
 
 //token handling middleware
