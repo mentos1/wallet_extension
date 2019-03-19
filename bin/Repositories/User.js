@@ -78,7 +78,14 @@ async function findByTwitterId(id) {
         console.error(err);
     }
 
-    return [...rows];
+    let users = [...rows]
+
+    if (users.length) {
+        return users[0];
+    } else {
+        return null;
+    }
+
 }
 
 module.exports = {findById, getAll, create, has, findByTwitterId};
