@@ -48,9 +48,6 @@ router.get('/', (req, res, next) => {
         }
     });
 }, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
-    console.error('_____________');
-    console.log(req);
-    console.error('_____________');
     if (!req.user) {
         return res.send(401, 'User Not Authenticated');
     }
