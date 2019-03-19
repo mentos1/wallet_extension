@@ -12,7 +12,9 @@ module.exports = function () {
             callbackURL: "https://wallet.primecore.io/auth_twitter"
         },
         function (token, tokenSecret, profile, done) {
+            console.log('_______________________---');
             console.log(token, tokenSecret, profile, done);
+            console.log('_______________________---');
         }));
 
 };

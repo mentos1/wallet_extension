@@ -42,19 +42,15 @@ router.get('/', (req, res, next) => {
         const isValid = user.isValid_Twitter(parsedBody);
 
         if (isValid.status) {
-            if (!UserRepositories.has(parsedBody.user_id)) {
-                UserRepositories.create(parsedBody);
-            }
-
             next();
         } else {
             return res.status(401).send(isValid)
         }
     });
 }, passport.authenticate('twitter-token', {session: false}), function(req, res, next) {
-    console.error('_____________');
+    console.error('_______!!______');
     console.log(req);
-    console.error('_____________');
+    console.error('_______!!______');
     if (!req.user) {
         return res.send(401, 'User Not Authenticated');
     }
