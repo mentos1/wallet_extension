@@ -9,7 +9,8 @@ const {user} = require('../../bin/Request/index');
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
-    return res.send(200, { message: '2sss' });
+    console.error('ERROR');
+    return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/');
     request.post({
         url: `https://api.twitter.com/oauth/access_token?oauth_verifier`,
         oauth: {
