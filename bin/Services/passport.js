@@ -1,6 +1,6 @@
 'use strict';
 
-var UserRepositories = require('../Repositories/index');
+var {UserRepositories} = require('../Repositories/index');
 var passport = require('passport'),
     TwitterTokenStrategy = require('passport-twitter-token');
 
@@ -17,7 +17,7 @@ module.exports = function () {
                 UserRepositories.create(profile);
             }
 
-            let user = UserRepositories.findByTwiterId(profile.id);
+            let user = UserRepositories.findByTwitterId(profile.id);
             let err = null;
             console.log('_______________________---');
             console.log(user);

@@ -68,7 +68,7 @@ async function findById(id) {
     return [...rows];
 }
 
-async function findByTwiterId(id) {
+async function findByTwitterId(id) {
     connection = await conn.connectionAsync();
 
     let rows;
@@ -81,4 +81,4 @@ async function findByTwiterId(id) {
     return [...rows];
 }
 
-module.exports = {findById, getAll, create, has, findByTwiterId};
+module.exports = {findById, getAll, create, has, findByTwitterId};
