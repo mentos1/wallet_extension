@@ -20,13 +20,13 @@ var send = function (req, res) {
     res.setHeader('x-auth-token', req.token);
     //return res.status(200).send(JSON.stringify(req.user));
 
-    let p = [];
+/*    let p = [];
 
     for (let prop in req.user) {
         p.push(prop + "=" + req.user[prop]);
     }
 
-    console.log(p.json('&'));
+    console.log(p.json('&'));*/
 
     return res.redirect('https://ikbncgaolpeahglmijkiaoklnmofdlmb.chromiumapp.org/?id' + 1);
 };
