@@ -81,4 +81,4 @@ async function findByTwiterId(id) {
     return [...rows];
 }
 
-module.exports = {findById, getAll, create, has};
+module.exports = {findById, getAll, create, has, findByTwiterId};
