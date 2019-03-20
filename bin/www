@@ -50,6 +50,20 @@ server_https.on('listening', async () => {
     passportConfig();
 });
 
+//soket
+const socketio = require('socket.io')
+const io = socketio(server)
+app.set('io', io)
+
+// Catch a start up request so that a sleepy Heroku instance can
+// be responsive as soon as possible
+app.get('/wake-up', (req, res) => res.send('👍'))
+
+
+server_https.listen(process.env.PORT || 8080, () => {
+    console.log('listening... 8080')
+});
+
 
 /**
  * Normalize a port into a number, string, or false.
