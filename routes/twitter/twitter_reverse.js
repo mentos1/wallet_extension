@@ -9,7 +9,7 @@ router.get('/', passport.authenticate('twitter', { failureRedirect: '/login' }),
         console.error('All right')
         console.log(req.app.io);
         console.error('All right')
-        req.app.io.emit('twitter', req.user); //.in(req.session.socketId)
+        req.app.io.in(req.session.socketId).emit('twitter', req.user); //.in(req.session.socketId)
         res.end()
         //res.redirect('/');
     });
