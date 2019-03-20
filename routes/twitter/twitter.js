@@ -12,6 +12,7 @@ const {user} = require('../../bin/Request/index');
     console.log(req.query);
     request.post({
         url: `https://api.twitter.com/oauth/access_token?oauth_verifier`,
+
         oauth: {
             consumer_key: process.env.TWITTER_KEY,
             consumer_secret: process.env.TWITTER_SECRET,
