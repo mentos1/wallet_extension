@@ -10,7 +10,7 @@ router.get('/', passport.authenticate('twitter', { failureRedirect: '/login' }),
         console.error('All right')
         console.log(SocketSingleton.io.in(req.session.socketId));
         console.error('All right')
-        SocketSingleton.io.in(req.session.socketId).emit('user', req.user)
+        SocketSingleton.io.in(req.session.socketId).emit('twitter', req.user)
         res.end()
         //res.redirect('/');
     });
