@@ -60,6 +60,7 @@ const io = socketio(socket);
 
 io.sockets.on('connection', function (socket) {
     console.log('client connect');
+    io.sockets.emit('twitter', 'test1');
     socket.on('echo', function (data) {
         io.sockets.emit('message', data);
     });
