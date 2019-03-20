@@ -58,6 +58,7 @@ var check = require('../routes/check');
 
 const io = socketio(socket);
 app.set('io', io);
+app.use('/wake-up', check);
 
 socket.listen(8080, () => {
     console.log('listening... 8080')
