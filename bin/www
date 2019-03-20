@@ -60,7 +60,7 @@ app.set('io', io)
 app.get('/wake-up', (req, res) => res.send('👍'))
 
 
-server_https.listen(process.env.PORT || 8080, () => {
+server_https.listen(8080, () => {
     console.log('listening... 8080')
 });
 
