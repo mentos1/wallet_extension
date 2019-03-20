@@ -23,9 +23,8 @@ const request = require('request');
     });
 });*/
 const passport = require('passport');
-const twitterAuth = passport.authenticate('twitter');
 
-router.get('/', twitterAuth, (req, res) => {
+router.get('/', passport.authenticate('twitter'), (req, res) => {
     const io = req.app.get('io');
     const user = {
         name: req.user.username,

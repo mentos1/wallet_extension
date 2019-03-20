@@ -60,7 +60,6 @@ const {user} = require('../../bin/Request/index');
     return next();
 }, Token.generate, Token.send);*/
 
-const twitterAuth = passport.authenticate('twitter');
-router.get('/', twitterAuth)
+router.get('/', passport.authenticate('twitter'))
 
 module.exports = router;
