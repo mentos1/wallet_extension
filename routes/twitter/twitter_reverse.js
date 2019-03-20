@@ -8,9 +8,7 @@ router.get('/', passport.authenticate('twitter', { failureRedirect: '/login' }),
     function(req, res) {
         // Successful authentication, redirect home.
         console.error('All right')
-        console.error(req.session.socketId);
-        console.error(req.user);
-        console.error(SocketSingleton.io);
+        console.log(SocketSingleton.io.in(req.session.socketId));
         console.error('All right')
         SocketSingleton.io.in(req.session.socketId).emit('user', req.user)
         res.end()
