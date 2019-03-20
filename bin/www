@@ -52,7 +52,7 @@ server_https.on('listening', async () => {
 
 //soket
 const socketio = require('socket.io')
-const io = socketio(server)
+const io = socketio(server_https)
 app.set('io', io)
 
 // Catch a start up request so that a sleepy Heroku instance can
