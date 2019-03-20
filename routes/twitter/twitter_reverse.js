@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('passport');
-var SocketSingleton = require('../../bin/socket-singletion');
 
 /* GET users listing. */
 router.get('/', passport.authenticate('twitter', { failureRedirect: '/login' }),
@@ -10,7 +9,7 @@ router.get('/', passport.authenticate('twitter', { failureRedirect: '/login' }),
         console.error('All right')
         //console.log(SocketSingleton.io);
         console.error('All right')
-        SocketSingleton.io.emit('twitter', req.user); //.in(req.session.socketId)
+        req.io.emit('twitter', req.user); //.in(req.session.socketId)
         res.end()
         //res.redirect('/');
     });

@@ -34,7 +34,7 @@ var server_http = http.createServer(app);
 var server_https = https.createServer(options, app);
 var socket = https.createServer(options, app);
 var passportConfig = require('./Services/passport');
-var SocketSingleton = require('./socket-singletion');
+
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -51,7 +51,25 @@ server_https.on('listening', async () => {
     passportConfig();
 });
 
-SocketSingleton.configure(socket);
+
+//soket
+const socketio = require('socket.io');
+var check = require('../routes/check');
+
+const io = socketio(socket);
+
+io.sockets.on('connection', function (socket) {
+    console.log('client connect');
+    socket.on('echo', function (data) {
+        io.sockets.emit('message', data);
+    });
+});
+
+// Make io accessible to our router
+app.use(function(req,res,next){
+    req.io = io;
+    next();
+});
 
 socket.listen(8080, () => {
     console.log('listening... 8080')
