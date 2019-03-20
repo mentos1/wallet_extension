@@ -23,6 +23,24 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(require('express-session')({ secret: 'WmpNpJTcfbhabk5jQ4XboJSkwFkmsKULondCxAxv', resave: true, saveUninitialized: true }));
+
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(passport.initialize());
+app.use(passport.session());
+
+// enable cors
+var corsOption = {
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    exposedHeaders: ['x-auth-token']
+};
+app.use(cors(corsOption));
+
+
 //app.use('/auth_twitter', auth_twitter);
 app.use('/auth_vk', auth_vk);
 app.use('/check', check);
@@ -46,21 +64,5 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-
-app.use(require('express-session')({ secret: 'WmpNpJTcfbhabk5jQ4XboJSkwFkmsKULondCxAxv', resave: true, saveUninitialized: true }));
-
-// Initialize Passport and restore authentication state, if any, from the
-// session.
-app.use(passport.initialize());
-app.use(passport.session());
-
-// enable cors
-var corsOption = {
-    origin: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    exposedHeaders: ['x-auth-token']
-};
-app.use(cors(corsOption));
 
 module.exports = app;
