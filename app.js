@@ -9,7 +9,7 @@ var auth_vk = require('./routes/auth_vk');
 var check = require('./routes/check');
 var twitter = require('./routes/twitter/twitter');
 var twitter_reverse = require('./routes/twitter/twitter_reverse');
-
+const session = require('express-session');
 const cors = require('cors');
 var app = express();
 
@@ -46,6 +46,12 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+app.use(session({
+    secret: 'KeyboardKittenstestKeyboardKittens',
+    resave: true,
+    saveUninitialized: true
+}))
 
 // enable cors
 var corsOption = {
