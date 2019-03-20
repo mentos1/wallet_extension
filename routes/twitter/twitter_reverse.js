@@ -3,7 +3,7 @@ var router = express.Router();
 const request = require('request');
 
 /* GET users listing. */
-router.post('/', function(req, res) {
+/*router.post('/', function(req, res) {
     request.post({
         url: 'https://api.twitter.com/oauth/request_token',
         oauth: {
@@ -21,6 +21,18 @@ router.post('/', function(req, res) {
         console.log(jsonStr);
         res.send(JSON.parse(jsonStr));
     });
+});*/
+const passport = require('passport');
+const twitterAuth = passport.authenticate('twitter');
+
+router.get('/', twitterAuth, (req, res) => {
+    const io = req.app.get('io');
+    const user = {
+        name: req.user.username,
+        photo: req.user.photos[0].value.replace(/_normal/, '')
+    }
+    io.in(req.session.socketId).emit('twitter', user)
+    res.end()
 });
 
 module.exports = router;

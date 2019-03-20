@@ -8,7 +8,7 @@ const {user} = require('../../bin/Request/index');
 
 
 /* GET users listing. */
-router.get('/', (req, res, next) => {
+/*router.get('/', (req, res, next) => {
     console.log(req.query);
     request.post({
         url: `https://api.twitter.com/oauth/access_token?oauth_verifier`,
@@ -25,14 +25,14 @@ router.get('/', (req, res, next) => {
 
         const bodyString = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
 
-        /*
+        /!*
         * {
         *   "oauth_token": "1083652953083396098-zGRIf0iqwqr5qTlaPCeJuhypqnWrFu",
         *   "oauth_token_secret": "HiWuwJDsChNwy7fCaA8sxGfi7n9DK1JUiljTCTY2GqTkq",
         *   "user_id": "1083652953083396098",
         *   "screen_name": "Artem82994509"
         * }
-        * */
+        * *!/
         const parsedBody = JSON.parse(bodyString);
 
         req.body['oauth_token'] = parsedBody.oauth_token;
@@ -58,6 +58,9 @@ router.get('/', (req, res, next) => {
     };
 
     return next();
-}, Token.generate, Token.send);
+}, Token.generate, Token.send);*/
+
+const twitterAuth = passport.authenticate('twitter');
+router.get('/', twitterAuth)
 
 module.exports = router;
