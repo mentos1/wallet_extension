@@ -25,8 +25,7 @@ module.exports = function () {
             console.log('_______________________---');
             return done(err, user);
         }));*/
-    passport.serializeUser((user, cb) => cb(null, user))
-    passport.deserializeUser((obj, cb) => cb(null, obj))
+
 
     passport.use(new TwitterStrategy({
             consumerKey: process.env.TWITTER_KEY,
@@ -48,4 +47,7 @@ module.exports = function () {
         }
     ));
 
+
+    passport.serializeUser((user, cb) => cb(null, user))
+    passport.deserializeUser((obj, cb) => cb(null, obj))
 };

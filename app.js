@@ -3,13 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const passport = require('passport');
 
 //var auth_twitter = require('./routes/auth_twitter');
 var auth_vk = require('./routes/auth_vk');
 var check = require('./routes/check');
 var twitter = require('./routes/twitter/twitter');
 var twitter_reverse = require('./routes/twitter/twitter_reverse');
-const session = require('express-session');
 const cors = require('cors');
 var app = express();
 
@@ -47,11 +47,12 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-app.use(session({
-    secret: 'KeyboardKittenstestKeyboardKittens',
-    resave: true,
-    saveUninitialized: true
-}))
+app.use(require('express-session')({ secret: 'WmpNpJTcfbhabk5jQ4XboJSkwFkmsKULondCxAxv', resave: true, saveUninitialized: true }));
+
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(passport.initialize());
+app.use(passport.session());
 
 // enable cors
 var corsOption = {
