@@ -26,8 +26,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/auth_twitter', auth_twitter);
 app.use('/auth_vk', auth_vk);
 app.use('/check', check);
-app.use('/auth_twitter', twitter);
-app.use('/auth/twitter/reverse', twitter_reverse);
+app.use('/auth/twitter', twitter);
+app.use('/auth_twitter', twitter_reverse);
+
+//app.use('/auth_twitter', twitter);
+//app.use('/auth/twitter/reverse', twitter_reverse);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

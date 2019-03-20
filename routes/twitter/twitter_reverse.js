@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const request = require('request');
+const passport = require('passport');
 
 /* GET users listing. */
-router.post('/', function(req, res) {
+/*router.post('/', function(req, res) {
     request.post({
         url: 'https://api.twitter.com/oauth/request_token',
         oauth: {
@@ -21,6 +22,12 @@ router.post('/', function(req, res) {
         console.log(jsonStr);
         res.send(JSON.parse(jsonStr));
     });
-});
+});*/
+
+router.get(passport.authenticate('twitter', { failureRedirect: '/login' }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/');
+    });
 
 module.exports = router;
