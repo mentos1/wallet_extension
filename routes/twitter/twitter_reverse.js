@@ -4,7 +4,7 @@ const passport = require('passport');
 const io = express().get('io');
 
 /* GET users listing. */
-router.post('/', passport.authenticate('twitter', { failureRedirect: '/login' }),
+router.get('/', passport.authenticate('twitter', { failureRedirect: '/login' }),
     function(req, res) {
         // Successful authentication, redirect home.
         console.error('All right')
