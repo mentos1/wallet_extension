@@ -1,6 +1,6 @@
 const express = require('express');
 let router = express.Router();
-const passport = require('passport');
+const passport = require('../../bin/Services/passport');
 const Token = require('../../bin/Services/token');
 const request = require('request');
 const {UserRepositories} = require('../../bin/Repositories/index');

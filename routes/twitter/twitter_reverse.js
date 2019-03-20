@@ -22,7 +22,7 @@ const request = require('request');
         res.send(JSON.parse(jsonStr));
     });
 });*/
-const passport = require('passport');
+const passport = require('../../bin/Services/passport');
 
 router.get('/', passport.authenticate('twitter'), (req, res) => {
     const io = req.app.get('io');
