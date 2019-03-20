@@ -49,16 +49,13 @@ server_https.on('listening', async () => {
     connection = await conn.createConn();
     passportConfig();
 });
-
 //soket
-const socketio = require('socket.io')
-const io = socketio(server_https)
-app.set('io', io)
+const socketio = require('socket.io');
+var check = require('../routes/check');
 
-// Catch a start up request so that a sleepy Heroku instance can
-// be responsive as soon as possible
-app.get('/wake-up', (req, res) => res.send('👍'))
-
+const io = socketio(server_https);
+app.set('io', io);
+app.use('/wake-up', check);
 
 server_https.listen(8080, () => {
     console.log('listening... 8080')
