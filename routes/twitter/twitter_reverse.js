@@ -3,7 +3,7 @@ var router = express.Router();
 const passport = require('passport');
 
 /* GET users listing. */
-router.get('/', passport.authenticate('twitter', { failureRedirect: '/login' }),
+router.get('/auth_twitter', passport.authenticate('twitter', { failureRedirect: '/login' }),
     (req, res) => {
         // Successful authentication, redirect home.
         const io = req.app.get('io')
