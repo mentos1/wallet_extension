@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
     console.error('All right')
     console.log(io);
     console.error('All right');
-    io.emit('twitter', 'test1_1');
+    io.emit('twitter', 'test1_1_3');
     res.send({"success" : true});
 });
 
