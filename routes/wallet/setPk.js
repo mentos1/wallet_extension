@@ -3,7 +3,7 @@ var router = express.Router();
 /*const {user} = require('../bin/Request/index');
 const {UserRepositories} = require('../bin/Repositories/index');*/
 const {setPk} = require('../../bin/Services/wallet');
-import {checkToken} from './middleware/index'
+const {checkToken} = require('./middleware/index');
 
 /* GET users listing. */
 router.post('/', checkToken, function(req, res, next) {
