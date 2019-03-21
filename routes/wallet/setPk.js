@@ -10,9 +10,9 @@ router.post('/', middleware.isToken, async function(req, res, next) {
     if (req.body && req.body.pk) {
         try {
 
-            let response = await setPk(req.body.token, req.body.pk);
-            if (response) {
-                return res.status(200).send('Success insert')
+            let address = await setPk(req.body.token, req.body.pk);
+            if (address) {
+                return res.status(200).send({address})
             } else {
                 return res.send(500, 'Error insert pk');
             }
