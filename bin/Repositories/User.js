@@ -167,4 +167,4 @@ async function isToken(token) {
 
 }
 
-module.exports = {findById, getAll, create, has, findByTwitterId, updateToken, createAddress, isToken};
+module.exports = {findById, getAll, create, has, findByTwitterId, updateToken, createAddress, isToken, getUserByToken};

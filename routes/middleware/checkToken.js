@@ -1,4 +1,4 @@
-const {UserRepositories} = require('../../../bin/Repositories/index');
+const {UserRepositories} = require('../../bin/Repositories/index');
 
 
 const isToken = async function (req, res, next) {

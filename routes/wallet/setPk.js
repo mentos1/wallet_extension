@@ -3,7 +3,7 @@ var router = express.Router();
 /*const {user} = require('../bin/Request/index');
 const {UserRepositories} = require('../bin/Repositories/index');*/
 const {setPk} = require('../../bin/Services/wallet');
-const {middleware} = require('./middleware/index');
+const {middleware} = require('../middleware/index');
 
 /* GET users listing. */
 router.post('/', middleware.isToken, async function(req, res, next) {

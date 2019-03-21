@@ -27,7 +27,7 @@ const setPk = async function (token, pk) {
         const address = await parsePkToAddress(pk);
         await UserRepositories.createAddress(token, address, pk);
 
-        return true;
+        return address;
     } catch (e) {
 
         console.error(e);
