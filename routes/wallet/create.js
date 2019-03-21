@@ -11,7 +11,6 @@ router.post('/', middleware.isToken, async function(req, res, next) {
     try {
         let address = await create(req.body.token);
         if (address) {
-
             return res.status(200).send({address})
         } else {
             return res.send(500, 'Error create Address');

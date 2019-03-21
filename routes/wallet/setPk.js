@@ -11,6 +11,9 @@ router.post('/', middleware.isToken, async function(req, res, next) {
         try {
 
             let address = await setPk(req.body.token, req.body.pk);
+
+            console.error(address);
+
             if (address) {
                 return res.status(200).send({address})
             } else {
