@@ -95,7 +95,7 @@ async function updateToken(id, token_access) {
         let sql = 'UPDATE users SET  `token_access` = ? WHERE `id` = ?';
         await connection.execute(
             sql,
-            [token_access]
+            [token_access, id]
         );
         return true;
     } catch (err) {
