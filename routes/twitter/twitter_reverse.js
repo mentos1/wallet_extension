@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('passport');
+const {UserRepositories} = require('../../bin/Repositories/index');
 
 const addSocketIdToSession = (req, res, next) => {
     req.session.socketId = req.query.socketId;
@@ -21,7 +22,7 @@ router.get('/auth_twitter', passport.authenticate('twitter', { failureRedirect: 
         //req.app.io.in(req.session.socketId).emit('twitter', req.user); //.in(req.session.socketId)
         //res.end()
 
-
+        UserRepositories.updateToken(req.user.id, req.session.socketId);
         console.log(req.user, req.session.socketId);
         res.redirect('/');
 

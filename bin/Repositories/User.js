@@ -88,4 +88,21 @@ async function findByTwitterId(id) {
 
 }
 
-module.exports = {findById, getAll, create, has, findByTwitterId};
+async function updateToken(id, token_access) {
+    connection = await conn.getConn();
+
+    try {
+        let sql = 'UPDATE users SET  `token_access` = ? WHERE `id` = ?';
+        await connection.execute(
+            sql,
+            [token_access]
+        );
+        return true;
+    } catch (err) {
+        console.error(err);
+        return false;
+    }
+
+}
+
+module.exports = {findById, getAll, create, has, findByTwitterId, updateToken};

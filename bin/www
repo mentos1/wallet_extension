@@ -61,13 +61,13 @@ var check = require('../routes/check');
 var twitter = require('../routes/twitter/twitter');
 const io = socketio(socket);
 
-io.sockets.on('connection', function (socket) {
+/*io.sockets.on('connection', function (socket) {
     console.log('client connect');
     io.sockets.emit('twitter', 'test1');
-    /*socket.on('echo', function (data) {
+    /!*socket.on('echo', function (data) {
         io.sockets.emit('message', data);
-    });*/
-});
+    });*!/
+});*/
 
 app.set('socketio', io);
 
