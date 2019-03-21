@@ -66,9 +66,10 @@ io.sockets.on('connection', function (socket) {
 });
 
 app.set('io', io);
-console.log(io)
+
 
 socket.listen(8080, () => {
+    console.log(io);
     console.log('listening... 8080')
 });
 
