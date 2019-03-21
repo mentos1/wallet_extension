@@ -1,3 +1,3 @@
-const checkToken = require('./checkToken');
+const middleware = require('./checkToken');
 
-module.exports = {checkToken}
+module.exports = {middleware}

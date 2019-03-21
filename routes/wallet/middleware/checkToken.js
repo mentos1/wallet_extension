@@ -10,10 +10,5 @@ const isToken = async function (req, res, next) {
      }
 };
 
-const addSocketIdToSession = (req, res, next) => {
-    req.session.socketId = req.query.socketId;
-    next()
-}
-
 
 module.exports = {isToken}
