@@ -54,7 +54,6 @@ server_https.on('listening', async () => {
 
 //soket
 const socketio = require('socket.io');
-var check = require('../routes/check');
 
 const io = socketio(socket);
 
@@ -66,11 +65,7 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-// Make io accessible to our router
-app.use(function(req, res, next) {
-    req.io = io;
-    next();
-});
+app.set('io', io)
 
 socket.listen(8080, () => {
     console.log('listening... 8080')

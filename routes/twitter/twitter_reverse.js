@@ -6,10 +6,12 @@ const passport = require('passport');
 router.get('/', passport.authenticate('twitter', { failureRedirect: '/login' }),
     function(req, res) {
         // Successful authentication, redirect home.
+        const io = req.app.get('io')
         console.error('All right')
-        console.log(req.io);
+        console.log(io);
         console.error('All right');
-        req.io.sockets.emit('twitter', 'test2');
+        io.sockets.emit('twitter', 'test2');
+        io.in(req.session.socketId).emit('twitter', user)('twitter', 'test2');
         //req.app.io.in(req.session.socketId).emit('twitter', req.user); //.in(req.session.socketId)
         res.end()
         //res.redirect('/');
