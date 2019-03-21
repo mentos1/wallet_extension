@@ -11,7 +11,7 @@ const addSocketIdToSession = (req, res, next) => {
 router.get('/auth_twitter', passport.authenticate('twitter', { failureRedirect: '/login' }),
     (req, res) => {
         // Successful authentication, redirect home.
-        const io = req.app.get('io')
+        const io = req.app.get('socketio')
         console.error('All right')
         console.log(io);
         console.error('All right');

@@ -69,7 +69,7 @@ io.sockets.on('connection', function (socket) {
     });*/
 });
 
-app.set('io', io);
+app.set('socketio', io);
 
 
 app.use('/auth_vk', auth_vk);
