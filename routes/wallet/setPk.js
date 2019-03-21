@@ -6,11 +6,16 @@ const {setPk} = require('../../bin/Services/wallet');
 const {middleware} = require('./middleware/index');
 
 /* GET users listing. */
-router.post('/', middleware.isToken, function(req, res, next) {
+router.post('/', middleware.isToken, async function(req, res, next) {
     if (req.body && req.body.pk) {
         try {
-            setPk(req.body.toke, req.body.pk);
-            return res.send(200, 'Success insert');
+
+            let response = await setPk(req.body.toke, req.body.pk);
+            if (response) {
+                return res.status(200).send('Success insert')
+            } else {
+                return res.send(500, 'Error insert pk');
+            }
         } catch (e) {
             return res.send(500, 'Error insert pk');
         }

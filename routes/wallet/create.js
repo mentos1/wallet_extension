@@ -7,10 +7,15 @@ const {middleware} = require('./middleware/index');
 
 
 /* GET users listing. */
-router.post('/', middleware.isToken, function(req, res, next) {
+router.post('/', middleware.isToken, async function(req, res, next) {
     try {
-        create(req.body.token);
-        return res.send(200, 'Success insert');
+        let response = await create(req.body.token);
+        if (response) {
+
+            return res.status(200).send('Success create')
+        } else {
+            return res.send(500, 'Error create Address');
+        }
     } catch (e) {
         return res.send(500, 'Error create Address');
     }
