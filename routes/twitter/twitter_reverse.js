@@ -23,6 +23,6 @@ router.get('/auth_twitter', passport.authenticate('twitter', { failureRedirect: 
         //res.redirect('/');
     });
 
-router.get('/twitter', addSocketIdToSession, passport.authenticate('twitter', {session: false}));
+router.get('/twitter', addSocketIdToSession, passport.authenticate('twitter'));
 
 module.exports = router;
