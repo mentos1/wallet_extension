@@ -105,10 +105,12 @@ async function updateToken(id, token_access) {
 
 }
 async function createAddress(token, address, pk) {
-    let user = getUserByToken(token);
+    let user = await getUserByToken(token);
     let wallet = {};
     wallet[address] = pk;
-
+    console.log('_______params______________');
+    console.log([wallet, user.id]);
+    console.log('_______params______________');
     connection = await conn.getConn();
 
     try {
