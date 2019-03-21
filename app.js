@@ -46,7 +46,7 @@ app.use('/auth_vk', auth_vk);
 app.use('/check', check);
 //app.use('/auth_twitter', twitter);
 // app.use('/auth/twitter/reverse', twitter_reverse);
-app.use('/twitter', twitter);
+//app.use('/twitter', twitter);
 //app.use('/auth_twitter', twitter_reverse);
 
 // catch 404 and forward to error handler

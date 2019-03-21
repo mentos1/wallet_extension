@@ -67,7 +67,7 @@ io.sockets.on('connection', function (socket) {
 
 app.set('io', io);
 
-app.use('/', twitter_reverse);
+app.use('/', twitter_reverse)
 
 socket.listen(8080, () => {
     console.log('listening... 8080')
