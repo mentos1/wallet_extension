@@ -16,8 +16,8 @@ router.get('/auth_twitter', passport.authenticate('twitter', { failureRedirect: 
         console.log(io);
         console.error('All right');
         io.emit('twitter', 'test1_1');
-        console.error('after send');
-        //io.in(req.session.socketId).emit('twitter', 'test2');
+        console.error(req.session.socketId);
+        io.in(req.session.socketId).emit('twitter', 'test2');
         //req.app.io.in(req.session.socketId).emit('twitter', req.user); //.in(req.session.socketId)
         res.end()
         //res.redirect('/');
