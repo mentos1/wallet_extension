@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 const passport = require('passport');
 
-router.use((req, res, next) => {
-    req.session.socketId = req.query.socketId
+const addSocketIdToSession = (req, res, next) => {
+    req.session.socketId = req.query.socketId;
     next()
-})
+}
 
 /* GET users listing. */
 router.get('/auth_twitter', passport.authenticate('twitter', { failureRedirect: '/login' }),
@@ -23,6 +23,6 @@ router.get('/auth_twitter', passport.authenticate('twitter', { failureRedirect: 
         //res.redirect('/');
     });
 
-router.get('/twitter', passport.authenticate('twitter', {session: false}));
+router.get('/twitter', addSocketIdToSession, passport.authenticate('twitter', {session: false}));
 
 module.exports = router;
