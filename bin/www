@@ -55,6 +55,10 @@ server_https.on('listening', async () => {
 //soket
 const socketio = require('socket.io');
 var twitter_reverse = require('../routes/twitter/twitter_reverse');
+//var auth_twitter = require('./routes/auth_twitter');
+var auth_vk = require('../routes/auth_vk');
+var check = require('../routes/check');
+var twitter = require('../routes/twitter/twitter');
 const io = socketio(socket);
 
 io.sockets.on('connection', function (socket) {
@@ -67,7 +71,26 @@ io.sockets.on('connection', function (socket) {
 
 app.set('io', io);
 
+
+app.use('/auth_vk', auth_vk);
+app.use('/check', check);
 app.use('/', twitter_reverse)
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    next(createError(404));
+});
+
+// error handler
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+});
 
 socket.listen(8080, () => {
     console.log('listening... 8080')
