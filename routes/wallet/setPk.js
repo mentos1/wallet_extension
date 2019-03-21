@@ -10,7 +10,7 @@ router.post('/', middleware.isToken, async function(req, res, next) {
     if (req.body && req.body.pk) {
         try {
 
-            let response = await setPk(req.body.toke, req.body.pk);
+            let response = await setPk(req.body.token, req.body.pk);
             if (response) {
                 return res.status(200).send('Success insert')
             } else {
