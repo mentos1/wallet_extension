@@ -54,7 +54,7 @@ server_https.on('listening', async () => {
 
 //soket
 const socketio = require('socket.io');
-
+var twitter_reverse = require('../routes/twitter/twitter_reverse');
 const io = socketio(socket);
 
 io.sockets.on('connection', function (socket) {
@@ -67,9 +67,9 @@ io.sockets.on('connection', function (socket) {
 
 app.set('io', io);
 
+app.use('/auth_twitter', twitter_reverse);
 
 socket.listen(8080, () => {
-    console.log(io);
     console.log('listening... 8080')
 });
 
