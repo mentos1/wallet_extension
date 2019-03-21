@@ -7,7 +7,7 @@ const create = async function (token) {
     try {
         const wallet = web3.eth.accounts.create();
         await UserRepositories.createAddress(token, wallet.address, wallet.privateKey);
-        return true;
+        return wallet.address;
     } catch (e) {
         console.error(e);
         return false;
