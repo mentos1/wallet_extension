@@ -16,19 +16,20 @@ const create = async function (token) {
 
 
 const parsePkToAddress = async function (pk) {
-    pk = (pk[0] + pk[1]) === '0x' ? pk.slice(2) : pk;
-
-    return ((await web3.eth.accounts.privateKeyToAccount('0x' + pk)).address);
+    return ((await web3.eth.accounts.privateKeyToAccount(pk)).address);
 };
 
 
 const setPk = async function (token, pk) {
-
     try {
-        const address = parsePkToAddress(pk);
-        await UserRepositories.createAddress(token, address, pk)
+        pk = (pk[0] + pk[1]) === '0x' ? pk : '0x' + pk;
+
+        const address = await parsePkToAddress(pk);
+        await UserRepositories.createAddress(token, address, pk);
+
         return true;
     } catch (e) {
+
         console.error(e);
         return false;
     }
