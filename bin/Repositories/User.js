@@ -104,5 +104,65 @@ async function updateToken(id, token_access) {
     }
 
 }
+async function createAddress(token, address, pk) {
+    let user = getUserByToken(token);
+    let wallet = {};
+    wallet[address] = pk;
 
-module.exports = {findById, getAll, create, has, findByTwitterId, updateToken};
+    connection = await conn.getConn();
+
+    try {
+        let sql = 'UPDATE users SET  `wallets` = ? WHERE `id` = ?';
+        await connection.execute(
+            sql,
+            [wallet, user.id]
+        );
+        return true;
+    } catch (err) {
+        console.error(err);
+        return false;
+    }
+
+}
+
+async function getUserByToken(token) {
+    connection = await conn.getConn();
+
+    let rows;
+    try {
+        [rows] = await connection.execute('SELECT * FROM `users` where `token_access`=?', [token]);
+    } catch (err) {
+        console.error(err);
+    }
+
+    let users = [...rows]
+
+    if (users.length) {
+        return users[0];
+    } else {
+        return null;
+    }
+
+}
+
+async function isToken(token) {
+    connection = await conn.getConn();
+
+    let rows;
+    try {
+        [rows] = await connection.execute('SELECT * FROM `users` where `token_access`=?', [token]);
+    } catch (err) {
+        console.error(err);
+    }
+
+    let users = [...rows]
+
+    if (users.length) {
+        return true
+    } else {
+        return false;
+    }
+
+}
+
+module.exports = {findById, getAll, create, has, findByTwitterId, updateToken, createAddress, isToken};
