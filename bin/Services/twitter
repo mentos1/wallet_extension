@@ -7,11 +7,16 @@ var client = new Twitter({
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
-var params = {user_id: 1083652953083396098};
-client.post('followers/list', params)
-    .then(function (tweet) {
-        console.log(tweet);
-    })
-    .catch(function (error) {
-        throw error;
-    })
+
+function getFriends(id) {
+    var params = {user_id: id};
+    client.post('followers/list', params)
+        .then(function (tweet) {
+            console.log(tweet);
+        })
+        .catch(function (error) {
+            throw error;
+        })
+}
+
+module.exports = {getFriends}
