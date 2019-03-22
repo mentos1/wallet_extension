@@ -28,22 +28,24 @@ function getFriends(id) {
         method: 'GET',
         data: { user_id: id }
     };
-    let header = oauth.authorize(request_data, token);/*
-    header.oauth_consumer_key = 'FqCzsrE0gO27PWnKSAoW4Vr58';
-    header.oauth_signature =encodeURIComponent(header.oauth_signature);*/
+    let form = oauth.authorize(request_data, token);
+    //header.oauth_consumer_key = 'FqCzsrE0gO27PWnKSAoW4Vr58';
+    form.oauth_signature =encodeURIComponent(form.oauth_signature);
+
+
 
     console.error("________1_______")
     console.error(request_data, token)
     console.error(oauth.authorize(request_data, token))
-    console.error(header)
-    console.log(oauth.toHeader(header));
+    console.error(form)
+    console.log(oauth.toHeader(form));
     console.error("________1_______")
 
 
     request({
         url: request_data.url,
         method: request_data.method,
-        headers: oauth.toHeader(header)
+        form: form
     }, function(error, response, body) {
         console.error("_______________")
         console.error(error)
