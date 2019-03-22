@@ -185,6 +185,7 @@ function removeSecretFields(user) {
     delete user['access_token_secret_twitter'];
     user.address = user.wallets.address;
     delete user['token_access'];
+
     return user;
 }
 
