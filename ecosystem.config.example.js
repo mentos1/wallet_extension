@@ -27,6 +27,8 @@ module.exports = {
 
                 TWITTER_KEY  : '',
                 TWITTER_SECRET  : '',
+                ACCESS_TOKEN_KEY  : '',
+                ACCESS_TOKEN_SECRET : '',
 
                 API_KEY_SPARKPOST   : '8cf4811bac642...'
             },

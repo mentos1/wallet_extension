@@ -40,14 +40,7 @@ const getBalance = async function (address) {
 
         let balance = await web3.eth.getBalance(address); //Will give value in.
 
-        console.log(balance);
-        if (balance) {
-
-            return web3.utils.fromWei(balance, 'ether');
-        } else {
-
-            return balance;
-        }
+        return web3.utils.fromWei(balance, 'ether');
     } catch (e) {
 
         console.error(e);
