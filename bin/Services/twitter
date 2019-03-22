@@ -22,11 +22,6 @@ const oauth = OAuth({
     }
 });
 
-const request_data = {
-    url: 'https://api.twitter.com/1/statuses/update.json?include_entities=true',
-    method: 'POST',
-    data: { status: 'Hello Ladies + Gentlemen, a signed OAuth request!' }
-};
 
 // Note: The token is optional for some requests
 const token = {
@@ -36,14 +31,21 @@ const token = {
 
 
 function getFriends(id) {
-    request({
+    const request_data = {
         url: 'https://api.twitter.com/1.1/followers/list.json?user_id=' + id,
         method: 'GET',
+        data: { user_id: id }
+    };
+    console.log(oauth.authorize(request_data, token));
+
+    request({
+        url: request_data.url,
+        method: request_data.method,
         headers: oauth.toHeader(oauth.authorize(request_data, token))
     }, function(error, response, body) {
         console.error("_______________")
         console.error(error)
-        console.log(response, body);
+        console.log(body);
         console.error("_______________")
 
         // Process your data here
