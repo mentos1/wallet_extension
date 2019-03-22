@@ -43,7 +43,7 @@ const getBalance = async function (address) {
         console.log(balance);
         if (balance) {
 
-            return web3.toDecimal(balance);
+            return web3.utils.fromWei(balance, 'ether');
         } else {
 
             return balance;
