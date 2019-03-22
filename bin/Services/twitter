@@ -28,9 +28,9 @@ function getFriends(id) {
         method: 'GET',
         data: { user_id: id }
     };
-    let header = oauth.authorize(request_data, token);
+    let header = oauth.authorize(request_data, token);/*
     header.oauth_consumer_key = 'FqCzsrE0gO27PWnKSAoW4Vr58';
-    header.oauth_signature =encodeURIComponent(header.oauth_signature);
+    header.oauth_signature =encodeURIComponent(header.oauth_signature);*/
 
     console.error("________1_______")
     console.error(request_data, token)
