@@ -30,12 +30,8 @@ function getFriends(id) {
     };
     let form = oauth.authorize(token);
     //header.oauth_consumer_key = 'FqCzsrE0gO27PWnKSAoW4Vr58';
-    form.oauth_signature = encodeURIComponent(form.oauth_signature);
 
     //https://api.twitter.com/1.1/followers/list.json?oauth_consumer_key=FqCzsrE0gO27PWnKSAoW4Vr58&oauth_token=1083652953083396098-zGRIf0iqwqr5qTlaPCeJuhypqnWrFu&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1553266433&oauth_nonce=SLE7wZ&oauth_version=1.0&oauth_signature=WeJRXUd0nbib%2Fqpn0pb%2FK%2BwK9Io%3D&user_id=1083652953083396098
-
-    console.error("______47_________")
-    console.log(request_data.data, form);
 
 
 
