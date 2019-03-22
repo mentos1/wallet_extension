@@ -39,6 +39,9 @@ const getBalance = function (address) {
     try {
 
         let balance = web3.eth.getBalance(address); //Will give value in.
+
+        console.log(balance);
+
         return web3.toDecimal(balance);
     } catch (e) {
 

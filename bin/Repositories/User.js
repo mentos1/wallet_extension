@@ -186,6 +186,7 @@ function removeSecretFields(user) {
     delete user['access_token_secret_twitter'];
     user.address = user.wallets && Object.keys(user.wallets).length ? Object.keys(user.wallets)[0] : null;
     user.balance = getBalance(user.address);
+    delete user['wallets'];
     delete user['token_access'];
 
     return user;
