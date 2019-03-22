@@ -176,6 +176,8 @@ async function isToken(token) {
 }
 
 function removeSecretFields(user) {
+    console.log(user, user.wallets, user.wallets.length, user.wallets[0]);
+
     delete user['id_twitter'];
     delete user['id_vk'];
     delete user['friends_vk'];
