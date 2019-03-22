@@ -79,9 +79,34 @@ const twitter = new TwitterClient({consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
     access_token_secret : "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"});
 
 
-function getFriends(id) {
+function getFriendsList(id) {
     const twitterAccount = 'Artem82994509';
-    const count = 12;
+    const count = 200;
+
+// using promise
+    twitter.getFriendsList(twitterAccount, count)
+        .then(data => {
+            console.log(data);
+            // data.followers : Array of the followers name ( 12 followers because count = 12)
+            // data.fullInfos : More infos below
+            // data.user : 'iAmAlphaZz' in this case
+        })
+        .catch(err => {
+            console.error(err.error);
+        });
+
+// using async/await
+/*    try {
+        const data = await twitter.getFollowersList(twitterAccount, count)
+    } catch (e) {
+        throw e
+    }*/
+}
+
+
+function getFollowersList(id) {
+    const twitterAccount = 'Artem82994509';
+    const count = 200;
 
 // using promise
     twitter.getFollowersList(twitterAccount, count)
@@ -104,4 +129,4 @@ function getFriends(id) {
 }
 
 
-module.exports = {getFriends}
+module.exports = {getFriendsList, getFollowersList}

@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const {getFriends} = require('../bin/Services/twitter');
+const {getFollowersList, getFriendsList} = require('../bin/Services/twitter');
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    getFriends(1083652953083396098);
+    getFriendsList(1083652953083396098);
+    getFollowersList(1083652953083396098);
     res.send({"success" : true});
 });
 
