@@ -3,7 +3,7 @@ let connection;
 
 async function create(profile, token, tokenSecret) {
     connection = await conn.getConn();
-    const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`, `created_at`, `updated_at`, `photo`, `email`) VALUES (?,?,?,?,?,?,?)';
+    const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`, `created_at`, `updated_at`, `photo`, `email`) VALUES (?,?,?,?,?,?,?,?)';
 
     let array = [
         token,
