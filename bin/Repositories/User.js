@@ -1,14 +1,20 @@
 const conn = require('../connect');
 let connection;
 
-async function create(body) {
+async function create(profile, token, tokenSecret) {
     connection = await conn.getConn();
-    const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`, `created_at`, `updated_at`, `photo`) VALUES (?,?,?,?,?,?,?)';
+    const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`, `created_at`, `updated_at`, `photo`, `email`) VALUES (?,?,?,?,?,?,?)';
 
-    let array = Object.values(body);
-    array.push(new Date());
-    array.push(new Date());
-    array.push(body.photos[0].value.replace(/_normal/, ''));
+    let array = [
+        token,
+        tokenSecret,
+        profile.id,
+        profile.displayName,
+        new Date(),
+        new Date(),
+        profile.photos && profile.photos .length ? profile.photos[0].value.replace(/_normal/, '') : '',
+        profile.emails && profile.emails.length  ? profile.emails[0].value : ''
+    ];
 
     try {
         let response = await connection.execute(
@@ -105,6 +111,7 @@ async function updateToken(id, token_access) {
     }
 
 }
+
 async function createAddress(token, address, pk) {
     let user = await getUserByToken(token);
     let wallet = {};
