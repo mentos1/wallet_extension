@@ -36,10 +36,12 @@ module.exports = function () {
         async function(token, tokenSecret, profile, cb) {
             console.log('__________profile_____________---');
             console.log(profile);
-            console.log(UserRepositories.has(profile.id));
+            console.log(await UserRepositories.has(profile.id));
             console.log('__________profile_____________---');
+            let hasUser = await UserRepositories.has(profile.id);
 
-            if (UserRepositories.has(profile.id) === null) {
+
+            if (hasUser) {
                 UserRepositories.create(profile);
             }
 
