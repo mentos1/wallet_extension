@@ -177,7 +177,7 @@ async function isToken(token) {
 
 function removeSecretFields(user) {
     console.log('_____________adres');
-    console.error(user, user.wallets, user.wallets.length, user.wallets[0]);
+    console.error(Object.keys(user.wallets));
     console.log('_____________adres');
 
     delete user['id_twitter'];
@@ -187,7 +187,7 @@ function removeSecretFields(user) {
     delete user['access_token_vk'];
     delete user['access_token_twitter'];
     delete user['access_token_secret_twitter'];
-    user.address = user.wallets && user.wallets.length ? user.wallets.address : null;
+    user.address = user.wallets && Object.keys(user.wallets).length ? Object.keys(user.wallets)[0] : null;
     delete user['token_access'];
 
     return user;
