@@ -39,7 +39,7 @@ module.exports = function () {
             console.log(UserRepositories.has(profile.id));
             console.log('__________profile_____________---');
 
-            if (UserRepositories.has(profile.id)) {
+            if (UserRepositories.has(profile.id) === null) {
                 UserRepositories.create(profile);
             }
 

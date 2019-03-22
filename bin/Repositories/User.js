@@ -3,10 +3,6 @@ let connection;
 
 async function create(body) {
     connection = await conn.getConn();
-
-    console.log('____________12_______________-')
-    console.log(body)
-    console.log('_____________23______________-')
     const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`, `created_at`, `updated_at`, `photo`) VALUES (?,?,?,?,?,?,?)';
 
     let array = Object.values(body);
@@ -42,7 +38,7 @@ async function has(id) {
     } catch (err) {
 
         console.error(err);
-        return false;
+        return null;
     }
 }
 
