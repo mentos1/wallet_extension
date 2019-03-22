@@ -23,6 +23,9 @@ var twitter = new Twitter(config);
 
 function getFriends(id) {
     var params = {user_id: id};
+
+    console.log(twitter);
+
     twitter.getFollowersList(params, error, success);
 }
 
