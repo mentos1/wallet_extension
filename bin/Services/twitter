@@ -1,6 +1,6 @@
 const request = require('request');
-const OAuth   = require('oauth-1.0a');
-const crypto  = require('crypto');
+const OAuth = require('oauth-1.0a');
+const crypto = require('crypto');
 
 // Initialize
 const oauth = OAuth({
@@ -23,30 +23,46 @@ const token = {
 
 
 function getFriends(id) {
-    return 1;
-    //header.oauth_consumer_key = 'FqCzsrE0gO27PWnKSAoW4Vr58';
+    try {
+        const request_data = {
+            url: 'https://api.twitter.com/1.1/followers/list.json',
+            method: 'GET',
+            data: {user_id: id}
+        };
+        let form = oauth.authorize(request_data, token);
+        form.oauth_signature = encodeURIComponent(form.oauth_signature);
 
-    //https://api.twitter.com/1.1/followers/list.json?oauth_consumer_key=FqCzsrE0gO27PWnKSAoW4Vr58&oauth_token=1083652953083396098-zGRIf0iqwqr5qTlaPCeJuhypqnWrFu&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1553266433&oauth_nonce=SLE7wZ&oauth_version=1.0&oauth_signature=WeJRXUd0nbib%2Fqpn0pb%2FK%2BwK9Io%3D&user_id=1083652953083396098
+//https://api.twitter.com/1.1/followers/list.json?oauth_consumer_key=FqCzsrE0gO27PWnKSAoW4Vr58&oauth_token=1083652953083396098-zGRIf0iqwqr5qTlaPCeJuhypqnWrFu&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1553266433&oauth_nonce=SLE7wZ&oauth_version=1.0&oauth_signature=WeJRXUd0nbib%2Fqpn0pb%2FK%2BwK9Io%3D&user_id=1083652953083396098
+
+        request_data.url += jsonToParams(json_data);
+        console.error("________1_______");
+        console.error(request_data, token);
+        console.error(oauth.authorize(request_data, token));
+        console.error(form);
+        console.log(oauth.toHeader(form));
+        console.error("________1_______");
 
 
+/*        request({
+            url: request_data.url,
+            method: request_data.method,
+            qs: form
+        }, function (error, response, body) {
+            console.error("_______________")
+            console.error(error)
+            console.log(response, body);
+            console.error("_______________")
 
-/*    request({
-        url: request_data.url,
-        method: request_data.method,
-        qs: form
-    }, function(error, response, body) {
-        console.error("_______________")
-        console.error(error)
-        console.log(response, body);
-        console.error("_______________")
-
-        // Process your data here
-    });*/
+            // Process your data here
+        });*/
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 
 function jsonToParams(json_data) {
-    return Object.keys(json_data).map(function(k) {
+    return Object.keys(json_data).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
     }).join('&')
 }
