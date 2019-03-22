@@ -15,7 +15,7 @@ function getFriends(id) {
             console.log(tweet);
         })
         .catch(function (error) {
-            throw error;
+            console.error(error)
         })
 }
 
