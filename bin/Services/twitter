@@ -28,7 +28,7 @@ function getFriends(id) {
         method: 'GET',
         data: { user_id: id }
     };
-    let form = oauth.authorize(token);
+    let form = oauth.authorize(request_data, token);
     //header.oauth_consumer_key = 'FqCzsrE0gO27PWnKSAoW4Vr58';
 
     //https://api.twitter.com/1.1/followers/list.json?oauth_consumer_key=FqCzsrE0gO27PWnKSAoW4Vr58&oauth_token=1083652953083396098-zGRIf0iqwqr5qTlaPCeJuhypqnWrFu&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1553266433&oauth_nonce=SLE7wZ&oauth_version=1.0&oauth_signature=WeJRXUd0nbib%2Fqpn0pb%2FK%2BwK9Io%3D&user_id=1083652953083396098
