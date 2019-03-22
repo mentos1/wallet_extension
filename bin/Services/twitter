@@ -1,15 +1,3 @@
-var Twitter = require('twitter-js-client').Twitter;
-
-//Callback functions
-var error = function (err, response, body) {
-    console.error(err);
-};
-var success = function (data) {
-    console.log(data);
-};
-
-
-//Get this data from your twitter apps dashboard
 var config = {
     "consumerKey": process.env.TWITTER_CONSUMER_KEY,
     "consumerSecret": process.env.TWITTER_CONSUMER_SECRET,
@@ -18,15 +6,50 @@ var config = {
     "callBackUrl": "https://wallet.primecore.io/auth_twitter"
 }
 
-var twitter = new Twitter(config);
+const request = require('request');
+const OAuth   = require('oauth-1.0a');
+const crypto  = require('crypto');
+
+// Initialize
+const oauth = OAuth({
+    consumer: {
+        key: config.consumerKey,
+        secret: config.consumerSecret
+    },
+    signature_method: 'HMAC-SHA1',
+    hash_function(base_string, key) {
+        return crypto.createHmac('sha1', key).update(base_string).digest('base64');
+    }
+});
+
+const request_data = {
+    url: 'https://api.twitter.com/1/statuses/update.json?include_entities=true',
+    method: 'POST',
+    data: { status: 'Hello Ladies + Gentlemen, a signed OAuth request!' }
+};
+
+// Note: The token is optional for some requests
+const token = {
+    key: config.accessToken,
+    secret: config.accessTokenSecret
+};
 
 
 function getFriends(id) {
-    var params = {user_id: id};
+    request({
+        url: request_data.url,
+        method: 'GET',
+        form: {user_id : id},
+        headers: oauth.toHeader(oauth.authorize(request_data, token))
+    }, function(error, response, body) {
+        console.error("_______________")
+        console.error(error)
+        console.log(response, body);
+        console.error("_______________")
 
-    console.log(twitter);
-
-    twitter.getTweet({ id: '1111111111'}, error, success);
+        // Process your data here
+    });
 }
+
 
 module.exports = {getFriends}
