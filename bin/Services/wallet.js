@@ -41,12 +41,17 @@ const getBalance = async function (address) {
         let balance = await web3.eth.getBalance(address); //Will give value in.
 
         console.log(balance);
+        if (balance) {
 
-        return web3.toDecimal(balance);
+            return web3.toDecimal(balance);
+        } else {
+
+            return balance;
+        }
     } catch (e) {
 
         console.error(e);
-        return false;
+        return 0;
     }
 };
 
