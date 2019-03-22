@@ -4,11 +4,15 @@ let connection;
 async function create(body) {
     connection = await conn.getConn();
 
-    const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`, `created_at`, `updated_at`) VALUES (?,?,?,?,?,?)';
+    console.log('____________12_______________-')
+    console.log(body)
+    console.log('_____________23______________-')
+    const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`, `created_at`, `updated_at`, `photo`) VALUES (?,?,?,?,?,?,?)';
 
     let array = Object.values(body);
     array.push(new Date());
     array.push(new Date());
+    array.push(body.photos[0].value.replace(/_normal/, ''));
 
     try {
         let response = await connection.execute(
@@ -167,4 +171,28 @@ async function isToken(token) {
 
 }
 
-module.exports = {findById, getAll, create, has, findByTwitterId, updateToken, createAddress, isToken, getUserByToken};
+function removeSecretFields(user) {
+    delete user['id_twitter'];
+    delete user['id_vk'];
+    delete user['friends_vk'];
+    delete user['friends_twitter'];
+    delete user['access_token_vk'];
+    delete user['access_token_twitter'];
+    delete user['access_token_secret_twitter'];
+    user.address = user.wallets.address;
+    delete user['token_access'];
+    return user;
+}
+
+module.exports = {
+    findById,
+    getAll,
+    create,
+    has,
+    findByTwitterId,
+    updateToken,
+    createAddress,
+    isToken,
+    getUserByToken,
+    removeSecretFields
+};

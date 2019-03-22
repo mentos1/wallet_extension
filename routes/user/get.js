@@ -11,8 +11,7 @@ router.post('/', middleware.isToken, async function(req, res, next) {
     try {
         let user = await UserRepositories.getUserByToken(req.body.token);
         if (user) {
-
-            return res.status(200).send(user)
+            return res.status(200).send(UserRepositories.removeSecretFields(user))
         } else {
             return res.send(500, 'Error get user');
         }
