@@ -38,10 +38,7 @@ function getFriends(id) {
         request_data.url += '&' + jsonToParams(form);
 
         console.error("________1_______");
-        console.error(request_data, token);
-        console.error(oauth.authorize(request_data, token));
-        console.error(form);
-        console.log(oauth.toHeader(form));
+        console.error(request_data.url);
         console.error("________1_______");
 
 
