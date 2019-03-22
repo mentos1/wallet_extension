@@ -36,14 +36,7 @@ function getFriends(id) {
 
     console.error("______47_________")
     console.log(request_data.data, form);
-    let merge_array = Object.assign(request_data.data, form);
 
-    console.log(jsonToParams(merge_array));
-
-    request_data.url += '?' + jsonToParams(merge_array);
-
-    console.error("________16_______")
-    console.log(request_data.url);
 
 
 /*    request({
