@@ -1,22 +1,29 @@
-var Twitter = require('twitter');
+var Twitter = require('twitter-js-client').Twitter;
 
-var client = new Twitter({
-    consumer_key: process.env.TWITTER_CONSUMER_KEY,
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-    access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
-});
+//Callback functions
+var error = function (err, response, body) {
+    console.log('ERROR [%s]', err);
+};
+var success = function (data) {
+    console.log('Data [%s]', data);
+};
+
+
+//Get this data from your twitter apps dashboard
+var config = {
+    "consumerKey": process.env.TWITTER_CONSUMER_KEY,
+    "consumerSecret": process.env.TWITTER_CONSUMER_SECRET,
+    "accessToken": process.env.TWITTER_ACCESS_TOKEN_KEY,
+    "accessTokenSecret": process.env.TWITTER_ACCESS_TOKEN_SECRET,
+    "callBackUrl": "https://wallet.primecore.io/auth_twitter"
+}
+
+var twitter = new Twitter(config);
 
 
 function getFriends(id) {
     var params = {user_id: id};
-    client.post('followers/list', params)
-        .then(function (tweet) {
-            console.log(tweet);
-        })
-        .catch(function (error) {
-            console.error(error)
-        })
+    twitter.getFollowersList(params, error, success);
 }
 
 module.exports = {getFriends}
