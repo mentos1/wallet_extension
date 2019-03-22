@@ -35,5 +35,17 @@ const setPk = async function (token, pk) {
     }
 };
 
+const getBalance = function (address) {
+    try {
 
-module.exports = {create, setPk}
+        let balance = web3.eth.getBalance(address); //Will give value in.
+        return web3.toDecimal(balance);
+    } catch (e) {
+
+        console.error(e);
+        return false;
+    }
+};
+
+
+module.exports = {create, setPk, getBalance};

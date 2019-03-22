@@ -1,4 +1,5 @@
 const conn = require('../connect');
+const {getBalance} = require('../Services/wallet');
 let connection;
 
 async function create(profile, token, tokenSecret) {
@@ -176,10 +177,6 @@ async function isToken(token) {
 }
 
 function removeSecretFields(user) {
-    console.log('_____________adres');
-    console.error(Object.keys(user.wallets));
-    console.log('_____________adres');
-
     delete user['id_twitter'];
     delete user['id_vk'];
     delete user['friends_vk'];
@@ -188,6 +185,7 @@ function removeSecretFields(user) {
     delete user['access_token_twitter'];
     delete user['access_token_secret_twitter'];
     user.address = user.wallets && Object.keys(user.wallets).length ? Object.keys(user.wallets)[0] : null;
+    user.balance = getBalance(user.address);
     delete user['token_access'];
 
     return user;
