@@ -9,8 +9,8 @@ var client = new Twitter({
 
 
 function getFriends(id) {
-    var params = {user_id: id};
-    client.post('followers/list', params)
+    var params = {user_id: id, screen_name : 'Artem82994509'};
+    client.post('users/show', params)
         .then(function (tweet) {
             console.log(tweet);
         })
