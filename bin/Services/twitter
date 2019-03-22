@@ -1,11 +1,3 @@
-var config = {
-    "consumerKey": process.env.TWITTER_CONSUMER_KEY,
-    "consumerSecret": process.env.TWITTER_CONSUMER_SECRET,
-    "accessToken": process.env.TWITTER_ACCESS_TOKEN_KEY,
-    "accessTokenSecret": process.env.TWITTER_ACCESS_TOKEN_SECRET,
-    "callBackUrl": "https://wallet.primecore.io/auth_twitter"
-}
-
 const request = require('request');
 const OAuth   = require('oauth-1.0a');
 const crypto  = require('crypto');
@@ -13,8 +5,8 @@ const crypto  = require('crypto');
 // Initialize
 const oauth = OAuth({
     consumer: {
-        key: process.env.TWITTER_CONSUMER_KEY,
-        secret: process.env.TWITTER_CONSUMER_SECRET
+        key: 'FqCzsrE0gO27PWnKSAoW4Vr58',
+        secret: 'rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra'
     },
     signature_method: 'HMAC-SHA1',
     hash_function(base_string, key) {
@@ -25,8 +17,8 @@ const oauth = OAuth({
 
 // Note: The token is optional for some requests
 const token = {
-    key: config.accessToken,
-    secret: config.accessTokenSecret
+    key: '1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw',
+    secret: 'CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6'
 };
 
 
@@ -37,7 +29,7 @@ function getFriends(id) {
         data: { user_id: id }
     };
     let header = oauth.authorize(request_data, token);
-    header.oauth_consumer_key = process.env.TWITTER_CONSUMER_KEY;
+    header.oauth_consumer_key = 'FqCzsrE0gO27PWnKSAoW4Vr58';
     header.oauth_signature =encodeURIComponent(header.oauth_signature);
 
     console.error("________1_______")
