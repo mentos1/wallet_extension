@@ -40,8 +40,7 @@ module.exports = function () {
             console.log('__________profile_____________---');
             let hasUser = await UserRepositories.has(profile.id);
 
-
-            if (hasUser) {
+            if (!hasUser) {
                 UserRepositories.create(profile);
             }
 
