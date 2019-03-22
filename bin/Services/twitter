@@ -29,14 +29,14 @@ function getFriends(id) {
             method: 'GET',
             data: {user_id: id}
         };
-        let form = oauth.authorize(request_data, token);
+        let form = oauth.authorize(request_data.data, token);
         form.oauth_signature = encodeURIComponent(form.oauth_signature);
 
 //https://api.twitter.com/1.1/followers/list.json?oauth_consumer_key=FqCzsrE0gO27PWnKSAoW4Vr58&oauth_token=1083652953083396098-zGRIf0iqwqr5qTlaPCeJuhypqnWrFu&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1553266433&oauth_nonce=SLE7wZ&oauth_version=1.0&oauth_signature=WeJRXUd0nbib%2Fqpn0pb%2FK%2BwK9Io%3D&user_id=1083652953083396098
 
 
-//https://api.twitter.com/1.1/followers/list.json?oauth_consumer_key=FqCzsrE0gO27PWnKSAoW4Vr58&oauth_nonce=uuJmLreOoycKUYpvVslpYo7v0NfZiLmn&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1553267964&oauth_version=1.0&oauth_token=1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw&user_id=1083652953083396100&oauth_signature=Cu2KIB2MzCWvbMhwXoEZpulC8dw%253D
-        request_data.url += '?' + jsonToParams(form);
+//https://api.twitter.com/1.1/followers/list.json?oauth_consumer_key=FqCzsrE0gO27PWnKSAoW4Vr58&oauth_nonce=4RjJ4237mjI85vQv3s9P7RYahcpgxgU5&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1553268131&oauth_version=1.0&oauth_token=1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw&user_id=1083652953083396100&oauth_signature=6VobUBV9M5Y6GMLuHFfp8Ph3CSU%253D
+       request_data.url += '?' + jsonToParams(form);
 
         console.error("________1_______");
         console.error(request_data.url);
