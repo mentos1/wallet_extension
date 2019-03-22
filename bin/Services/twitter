@@ -36,12 +36,21 @@ function getFriends(id) {
         method: 'GET',
         data: { user_id: id }
     };
-    console.log(oauth.authorize(request_data, token));
+    let header = oauth.authorize(request_data, token);
+    header.oauth_signature =encodeURIComponent(header.oauth_signature);
+
+    console.error("________1_______")
+    console.error(request_data, token)
+    console.error(oauth.authorize(request_data, token))
+    console.error(header)
+    console.log(oauth.toHeader(header));
+    console.error("________1_______")
+
 
     request({
         url: request_data.url,
         method: request_data.method,
-        headers: oauth.toHeader(oauth.authorize(request_data, token))
+        headers: oauth.toHeader(header)
     }, function(error, response, body) {
         console.error("_______________")
         console.error(error)
