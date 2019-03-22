@@ -186,7 +186,7 @@ async function removeSecretFields(user) {
     delete user['access_token_twitter'];
     delete user['access_token_secret_twitter'];
     user.address = user.wallets && Object.keys(user.wallets).length ? Object.keys(user.wallets)[0] : null;
-    user.balance = await getBalance(user.address);
+    user.balance = user.address ? await getBalance(user.address) : 'Address empty';
     delete user['wallets'];
     delete user['token_access'];
 
