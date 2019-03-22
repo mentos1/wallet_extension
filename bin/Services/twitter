@@ -34,11 +34,15 @@ function getFriends(id) {
 
 //https://api.twitter.com/1.1/followers/list.json?oauth_consumer_key=FqCzsrE0gO27PWnKSAoW4Vr58&oauth_token=1083652953083396098-zGRIf0iqwqr5qTlaPCeJuhypqnWrFu&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1553266433&oauth_nonce=SLE7wZ&oauth_version=1.0&oauth_signature=WeJRXUd0nbib%2Fqpn0pb%2FK%2BwK9Io%3D&user_id=1083652953083396098
 
-    request_data.url += jsonToParams(request_data.data);
-    request_data.url += jsonToParams(oauth.authorize(token));
+    let merge_array = Object.assign(request_data.data, jsonToParams(oauth.authorize(token)));
 
+    request_data.url += '?' + jsonToParams(merge_array);
+
+    console.error("________16_______")
     console.log(request_data.url);
+    console.log(jsonToParams(merge_array));
     console.log(oauth.authorize(token));
+    console.error("______47_________")
 
 /*    request({
         url: request_data.url,
