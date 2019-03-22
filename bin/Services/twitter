@@ -13,8 +13,8 @@ const crypto  = require('crypto');
 // Initialize
 const oauth = OAuth({
     consumer: {
-        key: config.consumerKey,
-        secret: config.consumerSecret
+        key: process.env.TWITTER_CONSUMER_KEY,
+        secret: process.env.TWITTER_CONSUMER_SECRET
     },
     signature_method: 'HMAC-SHA1',
     hash_function(base_string, key) {
@@ -37,6 +37,7 @@ function getFriends(id) {
         data: { user_id: id }
     };
     let header = oauth.authorize(request_data, token);
+    header.oauth_consumer_key = process.env.TWITTER_CONSUMER_KEY;
     header.oauth_signature =encodeURIComponent(header.oauth_signature);
 
     console.error("________1_______")
