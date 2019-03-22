@@ -61,6 +61,7 @@ var check = require('../routes/check');
 var twitter = require('../routes/twitter/twitter');
 var wallet_create = require('../routes/wallet/create');
 var wallet_create_by_pk = require('../routes/wallet/setPk');
+var get_user = require('../routes/user/get');
 
 const io = socketio(socket);
 
@@ -84,6 +85,7 @@ app.use('/', twitter_reverse);
 //wallet
 app.use('/wallet_create', wallet_create);
 app.use('/wallet_create_by_pk', wallet_create_by_pk);
+app.use('/user/get', get_user);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
