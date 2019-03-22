@@ -34,6 +34,11 @@ module.exports = function () {
             callbackURL: "https://wallet.primecore.io/auth_twitter"
         },
         async function(token, tokenSecret, profile, cb) {
+            console.log('__________profile_____________---');
+            console.log(profile);
+            console.log(!UserRepositories.has(profile.id);
+            console.log('__________profile_____________---');
+
             if (!UserRepositories.has(profile.id)) {
                 UserRepositories.create(profile);
             }
