@@ -3,7 +3,6 @@ let router = express.Router();
 const passport = require('passport');
 const Token = require('../../bin/Services/token');
 const request = require('request');
-const {UserRepositories} = require('../../bin/Repositories/index');
 const {user} = require('../../bin/Request/index');
 
 

@@ -4,6 +4,10 @@ const {UserRepositories} = require('../Repositories/index');
 
 const create = async function (token) {
 
+    console.log('_________UserRepositories___________');
+    console.log(UserRepositories);
+    console.log('_________UserRepositories___________');
+
     try {
         const wallet = web3.eth.accounts.create();
         await UserRepositories.createAddress(token, wallet.address, wallet.privateKey);
