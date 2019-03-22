@@ -79,14 +79,13 @@ const twitter = new TwitterClient({consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
     access_token_secret : "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"});
 
 
-function getFriendsList(id) {
-    const twitterAccount = 'Artem82994509';
+function getFriendsList(twitterAccount) {
     const count = 200;
 
 // using promise
     twitter.getFriendsList(twitterAccount, count)
         .then(data => {
-            console.log(data.fullInfos);
+            console.log(data.fullInfos.users);
             // data.friends : Array of the friends name ( 50 followers because count = 50)
             // data.fullInfos : More infos below
             // data.user : 'iAmAlphaZz' in this case
@@ -104,14 +103,13 @@ function getFriendsList(id) {
 }
 
 
-function getFollowersList(id) {
-    const twitterAccount = 'Artem82994509';
+function getFollowersList(twitterAccount) {
     const count = 200;
 
 // using promise
     twitter.getFollowersList(twitterAccount, count)
         .then(data => {
-            console.log(data.fullInfos);
+            console.log(data.fullInfos.users);
             // data.followers : Array of the followers name ( 12 followers because count = 12)
             // data.fullInfos : More infos below
             // data.user : 'iAmAlphaZz' in this case

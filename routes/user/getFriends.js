@@ -4,17 +4,14 @@ var router = express.Router();
 const {UserRepositories} = require('../bin/Repositories/index');*/
 const {UserRepositories} = require('../../bin/Repositories/index');
 const {middleware} = require('../middleware/index');
-
+const {getFriendsList} = require('../../bin/Services/twitter');
 
 /* GET users listing. */
 router.post('/', middleware.isToken, async function(req, res, next) {
     try {
         let user = await UserRepositories.getUserByToken(req.body.token);
-        console.log('________!_______________');
-        console.log(user);
-        console.log('________!_______________');
         if (user) {
-            let filteredUser = await UserRepositories.removeSecretFields(user);
+            let filteredUser = await getFriendsList(user.screen_name);
                 console.log('________!1_______________');
                 console.log(filteredUser);
                 console.log('________!1_______________');
