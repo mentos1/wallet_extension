@@ -14,7 +14,7 @@ router.post('/', middleware.isToken, async function(req, res, next) {
         console.log(user);
         console.log('________!_______________');
         if (user) {
-            let filteredUser = UserRepositories.removeSecretFields(user);
+            let filteredUser = await UserRepositories.removeSecretFields(user);
                 console.log('________!1_______________');
                 console.log(filteredUser);
                 console.log('________!1_______________');

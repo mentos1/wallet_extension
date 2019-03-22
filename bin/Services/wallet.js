@@ -35,10 +35,10 @@ const setPk = async function (token, pk) {
     }
 };
 
-const getBalance = function (address) {
+const getBalance = async function (address) {
     try {
 
-        let balance = web3.eth.getBalance(address); //Will give value in.
+        let balance = await web3.eth.getBalance(address); //Will give value in.
 
         console.log(balance);
 
