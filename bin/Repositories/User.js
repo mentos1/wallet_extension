@@ -37,12 +37,13 @@ async function has(id) {
     let rows;
     try {
         [rows] = await connection.execute('SELECT * FROM `users` where id=?', [id]);
+
+        return !!([...rows].length);
     } catch (err) {
+
         console.error(err);
+        return false;
     }
-
-    return !!([...rows].length);
-
 }
 
 async function getAll() {
