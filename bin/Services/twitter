@@ -86,8 +86,8 @@ function getFriendsList(id) {
 // using promise
     twitter.getFriendsList(twitterAccount, count)
         .then(data => {
-            console.log(data);
-            // data.followers : Array of the followers name ( 12 followers because count = 12)
+            console.log(data.friends);
+            // data.friends : Array of the friends name ( 50 followers because count = 50)
             // data.fullInfos : More infos below
             // data.user : 'iAmAlphaZz' in this case
         })
@@ -111,7 +111,7 @@ function getFollowersList(id) {
 // using promise
     twitter.getFollowersList(twitterAccount, count)
         .then(data => {
-            console.log(data);
+            console.log(data.followers);
             // data.followers : Array of the followers name ( 12 followers because count = 12)
             // data.fullInfos : More infos below
             // data.user : 'iAmAlphaZz' in this case
