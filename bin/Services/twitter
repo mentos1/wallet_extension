@@ -29,7 +29,7 @@ function getFriends(id) {
             method: 'GET',
             data: {user_id: id}
         };
-        let form = oauth.authorize(request_data.data, token);
+        let form = oauth.authorize(request_data, token);
         form.oauth_signature = encodeURIComponent(form.oauth_signature);
 
 //https://api.twitter.com/1.1/followers/list.json?oauth_consumer_key=FqCzsrE0gO27PWnKSAoW4Vr58&oauth_token=1083652953083396098-zGRIf0iqwqr5qTlaPCeJuhypqnWrFu&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1553266433&oauth_nonce=SLE7wZ&oauth_version=1.0&oauth_signature=WeJRXUd0nbib%2Fqpn0pb%2FK%2BwK9Io%3D&user_id=1083652953083396098
@@ -37,6 +37,8 @@ function getFriends(id) {
 
 //https://api.twitter.com/1.1/followers/list.json?oauth_consumer_key=FqCzsrE0gO27PWnKSAoW4Vr58&oauth_nonce=4RjJ4237mjI85vQv3s9P7RYahcpgxgU5&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1553268131&oauth_version=1.0&oauth_token=1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw&user_id=1083652953083396100&oauth_signature=6VobUBV9M5Y6GMLuHFfp8Ph3CSU%253D
        request_data.url += '?' + jsonToParams(form);
+
+
 
         console.error("________1_______");
         console.error(request_data.url);
@@ -65,6 +67,40 @@ function jsonToParams(json_data) {
     return Object.keys(json_data).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(json_data[k])
     }).join('&')
+}
+
+
+
+const  TwitterClient = require('easy-twitter');
+//_Create a new Twitter app and get the keys needed
+const twitter = new TwitterClient({consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
+    consumer_secret: "rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra",
+    access_token_key: "1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw",
+    access_token_secret : "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"});
+
+
+function getFriends(id) {
+    const twitterAccount = 'Artem82994509';
+    const count = 12;
+
+// using promise
+    twitter.getFollowersList(twitterAccount, count)
+        .then(data => {
+            console.log(data);
+            // data.followers : Array of the followers name ( 12 followers because count = 12)
+            // data.fullInfos : More infos below
+            // data.user : 'iAmAlphaZz' in this case
+        })
+        .catch(err => {
+            console.error(err.error);
+        });
+
+// using async/await
+/*    try {
+        const data = await twitter.getFollowersList(twitterAccount, count)
+    } catch (e) {
+        throw e
+    }*/
 }
 
 
