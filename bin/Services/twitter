@@ -26,7 +26,7 @@ function getFriends(id) {
 
     console.log(twitter);
 
-    twitter.getFollowersList(params, error, success);
+    twitter.getTweet({ id: '1111111111'}, error, success);
 }
 
 module.exports = {getFriends}
