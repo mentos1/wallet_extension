@@ -71,15 +71,18 @@ function jsonToParams(json_data) {
 
 const TwitterClient = require('easy-twitter');
 //_Create a new Twitter app and get the keys needed
-const twitter = new TwitterClient({
-    consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
-    consumer_secret: "rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra",
-    access_token_key: "1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw",
-    access_token_secret: "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"
-});
 
 
-async function getFriendsList(twitterAccount) {
+async function getFriendsList(twitterAccount, access_token_key, access_token_secret) {
+
+    const twitter = new TwitterClient({
+        consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
+        consumer_secret: "rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra",
+        access_token_key: access_token_key ? access_token_key : "1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw",
+        access_token_secret: access_token_secret ? access_token_secret : "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"
+    });
+
+
     const count = 200;
 
     try {
@@ -95,8 +98,15 @@ async function getFriendsList(twitterAccount) {
 }
 
 
-async function getFollowersList(twitterAccount) {
+async function getFollowersList(twitterAccount, access_token_key = null, access_token_secret = null) {
     const count = 200;
+
+    const twitter = new TwitterClient({
+        consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
+        consumer_secret: "rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra",
+        access_token_key: access_token_key ? access_token_key : "1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw",
+        access_token_secret: access_token_secret ? access_token_secret : "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"
+    });
 
     try {
         return (await twitter.getFollowersList(twitterAccount, count)).fullInfos.users;

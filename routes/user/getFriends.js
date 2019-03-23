@@ -11,7 +11,7 @@ router.post('/', middleware.isToken, async function(req, res, next) {
     try {
         let user = await UserRepositories.getUserByToken(req.body.token);
         if (user) {
-            let friends = await getFriendsList(user.screen_name);
+            let friends = await getFriendsList(user.screen_name, user.access_token_twitter, user.access_token_secret_twitter);
             console.log('______1______---')
             console.log(friends);
             console.log('______2______---')
