@@ -137,6 +137,29 @@ async function createAddress(token, address, pk) {
 
 }
 
+async function createAddressById(twitter_id, address, pk) {
+    let user = await findByTwitterId(twitter_id);
+    let wallet = {};
+    wallet[address] = pk;
+    console.log('_______params______________');
+    console.log([wallet, user.id]);
+    console.log('_______params______________');
+    connection = await conn.getConn();
+
+    try {
+        let sql = 'UPDATE users SET  `wallets` = ? WHERE `id` = ?';
+        await connection.execute(
+            sql,
+            [wallet, user.id]
+        );
+        return true;
+    } catch (err) {
+        console.error(err);
+        return false;
+    }
+
+}
+
 async function getUserByToken(token) {
     connection = await conn.getConn();
 
@@ -203,5 +226,6 @@ module.exports = {
     createAddress,
     isToken,
     getUserByToken,
-    removeSecretFields
+    removeSecretFields,
+    createAddressById
 };

@@ -3,7 +3,7 @@ var router = express.Router();
 const {UserRepositories} = require('../../bin/Repositories/index');
 const {middleware} = require('../middleware/index');
 const {getRandomWallet} = require('../../bin/Services/wallet');
-const {create} = require('../../bin/Services/wallet');
+const {create, createById} = require('../../bin/Services/wallet');
 
 /* GET users listing. */
 router.post('/', middleware.isToken, async function(req, res, next) {
@@ -17,9 +17,9 @@ router.post('/', middleware.isToken, async function(req, res, next) {
         user.address = user.wallets && Object.keys(user.wallets).length ? Object.keys(user.wallets)[0] : null;
 
         if (user.address === null) {
-            let wallet = await create(req.body.token);
-            if (wallet) {
-                return res.status(200).send({address : wallet.address})
+            let address = await createById(user.id);
+            if (address) {
+                return res.status(200).send({address})
             } else {
                 return res.send(500, 'Error create Address');
             }
