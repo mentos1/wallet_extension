@@ -5,6 +5,10 @@ const create = async function (token) {
 
     console.log('_________UserRepositories___________');
     console.log(require('../../bin/Repositories/index'));
+    const {UserRepositories} = require('../../bin/Repositories/index');
+    console.log(UserRepositories);
+    const test = require('../../bin/Repositories/index');
+    console.log(test.UserRepositories);
     console.log('_________UserRepositories___________');
 
     try {
