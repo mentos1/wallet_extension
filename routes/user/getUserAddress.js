@@ -11,7 +11,7 @@ router.post('/', middleware.isToken, async function(req, res, next) {
         let user = await UserRepositories.findByTwitterId(req.body.user_id);
 
         if (user === null) {
-            return res.status(200).send({address : 'user haven\'t address'})
+            return res.status(200).send({status : 0, address : 'user haven\'t address'})
         }
 
         user.address = user.wallets && Object.keys(user.wallets).length ? Object.keys(user.wallets)[0] : null;
@@ -19,12 +19,12 @@ router.post('/', middleware.isToken, async function(req, res, next) {
         if (user.address === null) {
             let address = await createById(user.id_twitter);
             if (address) {
-                return res.status(200).send({address})
+                return res.status(200).send({status : 1, address})
             } else {
-                return res.send(500, 'Error create Address');
+                return res.status(200).send({status : 0, address : 'Error create Address'})
             }
         } else {
-            return res.status(200).send({address : user.address})
+            return res.status(200).send({status : 1,  address : user.address})
         }
 
     } catch (e) {

@@ -64,6 +64,7 @@ var wallet_create_by_pk = require('../routes/wallet/setPk');
 var get_user = require('../routes/user/get');
 var get_user_friends = require('../routes/user/getFriends');
 var get_user_address = require('../routes/user/getUserAddress');
+var send_eth = require('../routes/wallet/sendEth');
 
 const io = socketio(socket);
 
@@ -90,6 +91,7 @@ app.use('/wallet_create_by_pk', wallet_create_by_pk);
 app.use('/user/get', get_user);
 app.use('/user/get_user_friends', get_user_friends);
 app.use('/user/get_user_address', get_user_address);
+app.use('/wallet/send_eth', send_eth);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
