@@ -36,8 +36,7 @@ function getFriends(id) {
 
 
 //https://api.twitter.com/1.1/followers/list.json?oauth_consumer_key=FqCzsrE0gO27PWnKSAoW4Vr58&oauth_nonce=4RjJ4237mjI85vQv3s9P7RYahcpgxgU5&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1553268131&oauth_version=1.0&oauth_token=1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw&user_id=1083652953083396100&oauth_signature=6VobUBV9M5Y6GMLuHFfp8Ph3CSU%253D
-       request_data.url += '?' + jsonToParams(form);
-
+        request_data.url += '?' + jsonToParams(form);
 
 
         console.error("________1_______");
@@ -45,18 +44,18 @@ function getFriends(id) {
         console.error("________1_______");
 
 
-/*        request({
-            url: request_data.url,
-            method: request_data.method,
-            qs: form
-        }, function (error, response, body) {
-            console.error("_______________")
-            console.error(error)
-            console.log(response, body);
-            console.error("_______________")
+        /*        request({
+                    url: request_data.url,
+                    method: request_data.method,
+                    qs: form
+                }, function (error, response, body) {
+                    console.error("_______________")
+                    console.error(error)
+                    console.log(response, body);
+                    console.error("_______________")
 
-            // Process your data here
-        });*/
+                    // Process your data here
+                });*/
     } catch (e) {
         console.error(e);
     }
@@ -70,60 +69,44 @@ function jsonToParams(json_data) {
 }
 
 
-
-const  TwitterClient = require('easy-twitter');
+const TwitterClient = require('easy-twitter');
 //_Create a new Twitter app and get the keys needed
-const twitter = new TwitterClient({consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
+const twitter = new TwitterClient({
+    consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
     consumer_secret: "rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra",
     access_token_key: "1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw",
-    access_token_secret : "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"});
+    access_token_secret: "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"
+});
 
 
-function getFriendsList(twitterAccount) {
+async function getFriendsList(twitterAccount) {
     const count = 200;
 
-// using promise
-    twitter.getFriendsList(twitterAccount, count)
-        .then(data => {
-            console.log(data.fullInfos.users);
-            // data.friends : Array of the friends name ( 50 followers because count = 50)
-            // data.fullInfos : More infos below
-            // data.user : 'iAmAlphaZz' in this case
-        })
-        .catch(err => {
-            console.error(err.error);
-        });
+    try {
+        return (await twitter.getFriendsList(twitterAccount, count)).fullInfos.users;
+    } catch (err) {
+        console.error(err);
+    }
 
-// using async/await
-/*    try {
-        const data = await twitter.getFollowersList(twitterAccount, count)
-    } catch (e) {
-        throw e
-    }*/
+    // data.friends : Array of the friends name ( 50 followers because count = 50)
+    // data.fullInfos : More infos below
+    // data.user : 'iAmAlphaZz' in this case
+
 }
 
 
-function getFollowersList(twitterAccount) {
+async function getFollowersList(twitterAccount) {
     const count = 200;
 
-// using promise
-    twitter.getFollowersList(twitterAccount, count)
-        .then(data => {
-            console.log(data.fullInfos.users);
-            // data.followers : Array of the followers name ( 12 followers because count = 12)
-            // data.fullInfos : More infos below
-            // data.user : 'iAmAlphaZz' in this case
-        })
-        .catch(err => {
-            console.error(err.error);
-        });
+    try {
+        return (await twitter.getFollowersList(twitterAccount, count)).fullInfos.users;
+    } catch (err) {
+        console.error(err);
+    }
 
-// using async/await
-/*    try {
-        const data = await twitter.getFollowersList(twitterAccount, count)
-    } catch (e) {
-        throw e
-    }*/
+    // data.followers : Array of the followers name ( 12 followers because count = 12)
+    // data.fullInfos : More infos below
+    // data.user : 'iAmAlphaZz' in this case
 }
 
 
