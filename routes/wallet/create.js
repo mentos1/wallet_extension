@@ -7,7 +7,7 @@ const {middleware} = require('../middleware/index');
 
 
 /* GET users listing. */
-router.post('/'/*, middleware.isToken*/, async function(req, res, next) {
+router.post('/', middleware.isToken, async function(req, res, next) {
     try {
         let address = await create(req.body.token);
         if (address) {
