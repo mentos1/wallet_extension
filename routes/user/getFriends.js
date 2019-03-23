@@ -13,7 +13,7 @@ router.post('/', middleware.isToken, async function(req, res, next) {
         if (user) {
             let filteredUser = await getFriendsList(user.screen_name);
                 console.log('________!1_______________');
-                console.log(filteredUser);
+                console.log(filteredUser); //todo cat info
                 console.log('________!1_______________');
             return res.status(200).send(filteredUser);
         } else {
