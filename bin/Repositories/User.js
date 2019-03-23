@@ -35,12 +35,12 @@ async function create(profile, token, tokenSecret) {
 
 }
 
-async function has(id) {
+async function has(id_twitter) {
     connection = await conn.getConn();
 
     let rows;
     try {
-        [rows] = await connection.execute('SELECT * FROM `users` where id=?', [id]);
+        [rows] = await connection.execute('SELECT * FROM `users` where id_twitter=? and screen_name IS NOT NULL' , [id_twitter]);
 
         return !!([...rows].length);
     } catch (err) {
