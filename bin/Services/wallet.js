@@ -6,13 +6,17 @@ const create = async function (token) {
     const {UserRepositories} = require('../../bin/Repositories/index');
 
     try {
-        const wallet = web3.eth.accounts.create();
+        const wallet = getRandomWallet();
         await UserRepositories.createAddress(token, wallet.address, wallet.privateKey);
         return wallet.address;
     } catch (e) {
         console.error(e);
         return false;
     }
+};
+
+const getRandomWallet = function () {
+    return web3.eth.accounts.create();
 };
 
 
@@ -52,4 +56,4 @@ const getBalance = async function (address) {
 };
 
 
-module.exports = {create, setPk, getBalance};
+module.exports = {create, setPk, getBalance, getRandomWallet};
