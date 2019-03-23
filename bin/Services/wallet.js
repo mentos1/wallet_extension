@@ -1,16 +1,16 @@
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.API_URL));
-import {createAddress} from '../Repositories/User';
+const {UserRepositories} = require('../Repositories/index');
 
 const create = async function (token) {
 
     console.log('_________UserRepositories___________');
-    console.log(createAddress);
+    console.log(UserRepositories);
     console.log('_________UserRepositories___________');
 
     try {
         const wallet = web3.eth.accounts.create();
-        await createAddress(token, wallet.address, wallet.privateKey);
+        await UserRepositories.createAddress(token, wallet.address, wallet.privateKey);
         return wallet.address;
     } catch (e) {
         console.error(e);
@@ -29,7 +29,7 @@ const setPk = async function (token, pk) {
         pk = (pk[0] + pk[1]) === '0x' ? pk : '0x' + pk;
 
         const address = await parsePkToAddress(pk);
-        await createAddress(token, address, pk);
+        await UserRepositories.createAddress(token, address, pk);
 
         return address;
     } catch (e) {
