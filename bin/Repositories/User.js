@@ -139,10 +139,15 @@ async function createAddress(token, address, pk) {
 
 async function createAddressById(twitter_id, address, pk) {
     let user = await findByTwitterId(twitter_id);
+
+    if (!user) {
+        return false;
+    }
+
     let wallet = {};
     wallet[address] = pk;
     console.log('_______params______________');
-    console.log([wallet, user.id]);
+    console.log([wallet, user, user.id]);
     console.log('_______params______________');
     connection = await conn.getConn();
 

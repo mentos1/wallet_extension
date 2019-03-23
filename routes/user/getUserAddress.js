@@ -17,7 +17,7 @@ router.post('/', middleware.isToken, async function(req, res, next) {
         user.address = user.wallets && Object.keys(user.wallets).length ? Object.keys(user.wallets)[0] : null;
 
         if (user.address === null) {
-            let address = await createById(user.id);
+            let address = await createById(user.id_twitter);
             if (address) {
                 return res.status(200).send({address})
             } else {

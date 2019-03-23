@@ -15,12 +15,12 @@ const create = async function (token) {
     }
 };
 
-const createById = async function (id) {
+const createById = async function (id_twitter) {
     const {UserRepositories} = require('../../bin/Repositories/index');
 
     try {
         const wallet = getRandomWallet();
-        await UserRepositories.createAddressById(id, wallet.address, wallet.privateKey);
+        await UserRepositories.createAddressById(id_twitter, wallet.address, wallet.privateKey);
         return wallet.address;
     } catch (e) {
         console.error(e);
