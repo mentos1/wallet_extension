@@ -15,7 +15,7 @@ async function create(profile, token, tokenSecret) {
         new Date(),
         profile.photos && profile.photos .length ? profile.photos[0].value.replace(/_normal/, '') : '',
         profile.emails && profile.emails.length  ? profile.emails[0].value : '',
-        profile.screen_name
+        profile.username
     ];
 
     try {
