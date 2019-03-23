@@ -3,7 +3,7 @@ const {UserRepositories} = require('../../bin/Repositories/index');
 
 const isToken = async function (req, res, next) {
     console.log('_________!!!!!!!!!!!!!__________________');
-    console.log(req.body, req.body.token);
+    console.log(req.body, req.body.token, UserRepositories);
     console.log('_________!!!!!!!!!!!!!__________________');
 
     if (!Object.values(req.body).length) {
