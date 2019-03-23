@@ -11,8 +11,11 @@ router.post('/', middleware.isToken, async function(req, res, next) {
     try {
         let user = await UserRepositories.getUserByToken(req.body.token);
         if (user) {
-            let filteredUser = await getFriendsList(user.screen_name);
-            return res.status(200).send({friends :filteredUser});
+            let friends = await getFriendsList(user.screen_name);
+            console.log('______1______---')
+            console.log(friends);
+            console.log('______2______---')
+            return res.status(200).send({friends});
         } else {
             return res.send(500, 'Error get user');
         }
