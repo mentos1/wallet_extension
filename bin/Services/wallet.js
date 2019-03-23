@@ -1,19 +1,13 @@
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.API_URL));
+//const {UserRepositories} = require('../../bin/Repositories/index'); //TODO doesn't work
 
 const create = async function (token) {
-
-    console.log('_________UserRepositories___________');
-    console.log(require('../../bin/Repositories/index'));
     const {UserRepositories} = require('../../bin/Repositories/index');
-    console.log(UserRepositories);
-    const test = require('../../bin/Repositories/index');
-    console.log(test.UserRepositories);
-    console.log('_________UserRepositories___________');
 
     try {
         const wallet = web3.eth.accounts.create();
-        //await UserRepositories.createAddress(token, wallet.address, wallet.privateKey);
+        await UserRepositories.createAddress(token, wallet.address, wallet.privateKey);
         return wallet.address;
     } catch (e) {
         console.error(e);
@@ -28,11 +22,13 @@ const parsePkToAddress = async function (pk) {
 
 
 const setPk = async function (token, pk) {
+    const {UserRepositories} = require('../../bin/Repositories/index');
+
     try {
         pk = (pk[0] + pk[1]) === '0x' ? pk : '0x' + pk;
 
         const address = await parsePkToAddress(pk);
-        //await UserRepositories.createAddress(token, address, pk);
+        await UserRepositories.createAddress(token, address, pk);
 
         return address;
     } catch (e) {
