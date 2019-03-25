@@ -35,6 +35,38 @@ async function create(profile, token, tokenSecret) {
 
 }
 
+async function update(profile, token, tokenSecret) {
+    connection = await conn.getConn();
+    let sql = 'UPDATE users SET  `access_token_twitter` = ?, `access_token_secret_twitter` = ?, `name` = ?,`updated_at` = ?, `photo` = ?, `email` = ?, `screen_name` = ?  WHERE `id_twitter` = ?';
+
+    let array = [
+        token,
+        tokenSecret,
+        profile.displayName,
+        new Date(),
+        profile.photos && profile.photos .length ? profile.photos[0].value.replace(/_normal/, '') : '',
+        profile.emails && profile.emails.length  ? profile.emails[0].value : '',
+        profile.username,
+        profile.id
+    ];
+
+    try {
+        let response = await connection.execute(
+            sql,
+            array
+        );
+
+        console.error('___________-response_________________')
+        console.log(response)
+        console.error('___________-response_________________')
+        return true;
+    } catch (e) {
+        console.log('Error insert : ', e);
+        return false;
+    }
+
+}
+
 async function createUser(id_twitter) {
     connection = await conn.getConn();
     const sql = 'INSERT INTO users (`id_twitter`, `created_at`, `updated_at`) VALUES (?,?,?)';
@@ -67,7 +99,7 @@ async function has(id_twitter) {
 
     let rows;
     try {
-        [rows] = await connection.execute('SELECT * FROM `users` where id_twitter=? and screen_name IS NOT NULL' , [id_twitter]);
+        [rows] = await connection.execute('SELECT * FROM `users` where id_twitter=?' , [id_twitter]); // and screen_name IS NOT NULL
 
         return !!([...rows].length);
     } catch (err) {
@@ -267,5 +299,6 @@ module.exports = {
     isToken,
     getUserByToken,
     removeSecretFields,
-    createAddressById
+    createAddressById,
+    update
 };

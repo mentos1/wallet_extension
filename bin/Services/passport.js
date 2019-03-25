@@ -42,14 +42,22 @@ module.exports = function () {
 
             if (!hasUser) {
                 await UserRepositories.create(profile, token, tokenSecret);
+            } else {
+                let user = await UserRepositories.findByTwitterId(profile.id);
+
+                if (
+                    !user.name ||
+                    !user.email ||
+                    !user.access_token_vk ||
+                    !user.access_token_secret_twitter ||
+                    !user.photo ||
+                    !user.screen_name
+                ) {
+                    await UserRepositories.update(profile, token, tokenSecret);
+                }
             }
 
             let user = await UserRepositories.findByTwitterId(profile.id);
-
-            if (user.token !== token) {
-                await UserRepositories.updateToken(profile.id, token);
-            }
-
             let err = null;
             console.log('_______________________---');
             console.log(user);
