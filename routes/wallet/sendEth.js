@@ -13,7 +13,7 @@ router.post('/', middleware.isToken, async function (req, res, next) {
     try {
         console.log(1);
         let user = await UserRepositories.getUserByToken(req.body.token);
-        let user_to = await UserRepositories.findById(req.body.user_id);
+        let user_to = await UserRepositories.findByTwitterId(req.body.user_id);
         let address = '';
         console.log(2);
 
