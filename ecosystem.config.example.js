@@ -30,6 +30,9 @@ module.exports = {
                 ACCESS_TOKEN_KEY  : '',
                 ACCESS_TOKEN_SECRET : '',
 
+
+                GAS_COEFFICIENT : '',
+
                 API_KEY_SPARKPOST   : '8cf4811bac642...'
             },
             exec_mode: "cluster",
