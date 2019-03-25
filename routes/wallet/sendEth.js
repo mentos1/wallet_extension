@@ -10,17 +10,26 @@ const {UserRepositories} = require('../../bin/Repositories/index');
 router.post('/', middleware.isToken, async function (req, res, next) {
 
     try {
+        console.log(1);
         let user = await UserRepositories.getUserByToken(req.body.token);
         let user_to = await UserRepositories.findById(req.body.user_id);
+        let address = '';
+        console.log(2);
 
         if (user_to === null) {
             await UserRepositories.createUser(req.body.user_id);
-        }
+            address = await createById(req.body.user_id);
 
-        let address = await createById(req.body.user_id);
+        } else {
+            address = await getAddress(req.body.user_id, res);
+
+        }
+        console.log(address);
 
         let pk = user.wallets && Object.values(user.wallets).length ? Object.values(user.wallets)[0] : null,
             amount = req.body.amount;
+
+        console.log(pk, amount);
 
         if (!amount || !address || !pk) {
             return res.status(500).send({status : 0, msg: 'Error params'})
@@ -28,6 +37,8 @@ router.post('/', middleware.isToken, async function (req, res, next) {
         }
 
         let response = await sendTransaction(pk, address, amount);
+
+        console.log(response);
 
         if (response.status) {
             return res.status(200).send({status : 1, msg: response.data})
