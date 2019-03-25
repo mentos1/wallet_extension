@@ -18,9 +18,8 @@ router.post('/', middleware.isToken, async function (req, res, next) {
         }
 
         let address = await createById(req.body.user_id);
-            user_to = await UserRepositories.findByTwitterId(req.body.user_id);
 
-        let pk = user_to.wallets && Object.values(user_to.wallets).length ? Object.values(user_to.wallets)[0] : null,
+        let pk = user.wallets && Object.values(user.wallets).length ? Object.values(user.wallets)[0] : null,
             amount = req.body.amount;
 
         if (!amount || !address || !pk) {
@@ -38,6 +37,7 @@ router.post('/', middleware.isToken, async function (req, res, next) {
         }
 
     } catch (e) {
+        console.error(e);
         return res.status(500).send({status : 0, msg: e})
     }
 
