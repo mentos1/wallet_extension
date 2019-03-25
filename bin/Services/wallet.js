@@ -135,15 +135,6 @@ const sendTransaction = async function (pk, to, amount) {
             reg_obj = /{.*}/gms;
 
         if (reg_error.test(err)) {
-            console.error('---------------------------obj-!1');
-            let obj = JSON.parse(reg_obj.exec(err));
-            console.error('obj', obj, obj.status);
-
-            if (obj && obj.status) {
-                return {status : 1, msg : "Success", data : transactionHash};
-            }
-        }
-        if (reg_error.test(err)) {
             let obj = JSON.parse(reg_obj.exec(err));
 
             if (obj && obj.status) {
