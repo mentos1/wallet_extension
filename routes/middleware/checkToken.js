@@ -10,12 +10,12 @@ const isToken = async function (req, res, next) {
         return res.send(304, 'Body is empty');
     }
 
-    let isToken = await UserRepositories.isToken(req.body.token);
-    if (isToken) {
+    /*let isToken = await UserRepositories.isToken(req.body.token);
+    if (isToken) {*/
         return next()
-    } else {
+    /*} else {
         return res.send(304, 'Token is Invalid');
-    }
+    }*/
 };
 
 
