@@ -9,16 +9,16 @@ const addSocketIdToSession = (req, res, next) => {
 }
 
 /* GET users listing. */
-router.get('/auth_twitter', () => {console.log(123)}/*passport.authenticate('twitter', { failureRedirect: '/login' }*/
-    /*(req, res) => {
+router.get('/auth_twitter', passport.authenticate('twitter', { failureRedirect: '/login' }),
+    (req, res) => {
         // Successful authentication, redirect home.
-        /!*const io = req.app.get('socketio')
+        /*const io = req.app.get('socketio')
         console.error('All right')
         console.log(io);
         console.error('All right');
         io.emit('twitter', 'test1_1');
         console.error(req.session.socketId);
-        io.in(req.session.socketId).emit('twitter', 'test2');*!/
+        io.in(req.session.socketId).emit('twitter', 'test2');*/
         //req.app.io.in(req.session.socketId).emit('twitter', req.user); //.in(req.session.socketId)
         //res.end()
 
@@ -26,7 +26,7 @@ router.get('/auth_twitter', () => {console.log(123)}/*passport.authenticate('twi
         console.log(req.user, req.session.socketId);
         res.redirect('/');
 
-    }*/);
+    });
 
 router.get('/twitter', addSocketIdToSession, passport.authenticate('twitter'));
 

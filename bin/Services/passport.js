@@ -7,7 +7,7 @@ var passport = require('passport'),
 
 module.exports = function () {
 
-/*    passport.use(new TwitterTokenStrategy({
+    passport.use(new TwitterTokenStrategy({
             consumerKey: process.env.TWITTER_KEY,
             consumerSecret: process.env.TWITTER_SECRET,
             includeEmail: true,
@@ -24,10 +24,10 @@ module.exports = function () {
             console.log(user);
             console.log('_______________________---');
             return done(err, user);
-        }));*/
+        }));
 
 
-    passport.use(new TwitterStrategy({
+/*    passport.use(new TwitterStrategy({
             consumerKey: process.env.TWITTER_KEY,
             consumerSecret: process.env.TWITTER_SECRET,
             includeEmail: true,
@@ -60,5 +60,5 @@ module.exports = function () {
 
 
     passport.serializeUser((user, cb) => cb(null, user))
-    passport.deserializeUser((obj, cb) => cb(null, obj))
+    passport.deserializeUser((obj, cb) => cb(null, obj))*/
 };
