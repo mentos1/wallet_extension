@@ -123,7 +123,7 @@ async function getFollowersList(twitterAccount, access_token_key = null, access_
 
 function sendMsg(recipient_id, text, access_token_key = null, access_token_secret = null) {
 
-    const client = new twitter_api({
+/*    const client = new twitter_api({
         consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
         consumer_secret: "rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra",
         access_token_key: access_token_key ? access_token_key : "1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw",
@@ -153,7 +153,79 @@ function sendMsg(recipient_id, text, access_token_key = null, access_token_secre
             resolve(tweet);
             return 0;
         });
-    });
+    });*/
+
+
+    var request = require('request')
+
+// twitter authentication
+    var twitter_oauth = {
+        consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
+        consumer_secret: "rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra",
+        token: access_token_key,
+        token_secret: access_token_secret
+    }
+
+// direct message request body
+    var dm_params = {
+        "event": {
+            "type": "message_create",
+            "message_create": {
+                "target": {
+                    "recipient_id": recipient_id
+                },
+                "message_data": {
+                    "text": text,
+                    /*"quick_reply": {
+                        "type": "options",
+                        "options": [
+                            {
+                                "label": "Red Bird",
+                                "description": "A description about the red bird.",
+                                "metadata": "external_id_1"
+                            },
+                            {
+                                "label": "Blue Bird",
+                                "description": "A description about the blue bird.",
+                                "metadata": "external_id_2"
+                            },
+                            {
+                                "label": "Black Bird",
+                                "description": "A description about the black bird.",
+                                "metadata": "external_id_3"
+                            },
+                            {
+                                "label": "White Bird",
+                                "description": "A description about the white bird.",
+                                "metadata": "external_id_4"
+                            }
+                        ]
+                    }*/
+                }
+            }
+        }
+    };
+
+// request options
+    var request_options = {
+        url: 'https://api.twitter.com/1.1/direct_messages/events/new.json',
+        oauth: twitter_oauth,
+        json: true,
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: dm_params
+    }
+
+// POST request to send Direct Message
+    request.post(request_options, function (error, response, body) {
+        console.log('error');
+        console.log(error);
+        console.log('body');
+        console.log(body);
+        console.log('response');
+        console.log(response);
+    })
 }
 
 
