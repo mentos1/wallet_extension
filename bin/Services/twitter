@@ -129,8 +129,6 @@ function sendMsg(recipient_id, text,  access_token_key = null, access_token_secr
         access_token_secret: access_token_secret ? access_token_secret : "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"
     });
 
-    console.log('client', client);
-
     return new Promise(function(resolve, reject){
         client.post('direct_messages/events/new', {
             type: 'message_create',
