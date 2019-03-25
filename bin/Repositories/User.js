@@ -241,7 +241,7 @@ async function getUserByToken(token) {
         console.error(err);
     }
 
-    let users = [...rows]
+    let users = [...rows];
 
     if (users.length) {
         return users[0];

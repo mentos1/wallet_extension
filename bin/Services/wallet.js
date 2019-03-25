@@ -122,7 +122,7 @@ const sendTransaction = async function (pk, to, amount) {
 
     let tx_transaction = web3.utils.sha3(serializedTx, {encoding: 'hex'});
 
-    return {status : 1, data : obj.tx_transaction};
+    return {status : 1, data : tx_transaction};
 
     try {
         let result = await web3.eth.sendSignedTransaction(serializedTx);
