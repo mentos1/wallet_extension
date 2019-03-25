@@ -81,10 +81,7 @@ const sendTransaction = async function (pk, to, amount) {
     const nonce = await web3.eth.getTransactionCount(from);
     console.log('pk, to, amount', pk, to, amount);
 
-    console.log('getGasPrice', (await web3.eth.getGasPrice()));
-    console.log('getGasPrice fix', (await web3.eth.getGasPrice()).toFixed());
-
-    let gasPrice = (await web3.eth.getGasPrice()).toFixed();
+    let gasPrice = await web3.eth.getGasPrice();
 
     const gasLimit = 21000;
     const balAmount = await web3.eth.getBalance(from);
