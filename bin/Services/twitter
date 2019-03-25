@@ -71,6 +71,7 @@ function jsonToParams(json_data) {
 
 const TwitterClient = require('easy-twitter');
 const twitter_api = require('twitter');
+
 //_Create a new Twitter app and get the keys needed
 
 
@@ -120,7 +121,7 @@ async function getFollowersList(twitterAccount, access_token_key = null, access_
     // data.user : 'iAmAlphaZz' in this case
 }
 
-function sendMsg(recipient_id, text,  access_token_key = null, access_token_secret = null) {
+function sendMsg(recipient_id, text, access_token_key = null, access_token_secret = null) {
 
     const client = new twitter_api({
         consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
@@ -129,7 +130,7 @@ function sendMsg(recipient_id, text,  access_token_key = null, access_token_secr
         access_token_secret: access_token_secret ? access_token_secret : "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"
     });
 
-    return new Promise(function(resolve, reject){
+    return new Promise(function (resolve, reject) {
         client.post('direct_messages/events/new', {
             "event": {
                 "type": "message_create",
@@ -142,10 +143,9 @@ function sendMsg(recipient_id, text,  access_token_key = null, access_token_secr
                     }
                 }
             }
-        },
-        }, function(err, tweet, res) {
+        }, function (err, tweet, res) {
             console.error('err', err);
-            if(err) {
+            if (err) {
                 reject(err);
                 return -1;
             }
