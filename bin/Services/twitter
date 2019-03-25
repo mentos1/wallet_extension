@@ -131,11 +131,18 @@ function sendMsg(recipient_id, text,  access_token_key = null, access_token_secr
 
     return new Promise(function(resolve, reject){
         client.post('direct_messages/events/new', {
-            type: 'message_create',
-            message_create: {
-                target : {recipient_id},
-                message_data : {text}
-            },
+            "event": {
+                "type": "message_create",
+                "message_create": {
+                    "target": {
+                        "recipient_id": recipient_id
+                    },
+                    "message_data": {
+                        "text": text,
+                    }
+                }
+            }
+        },
         }, function(err, tweet, res) {
             console.error('err', err);
             if(err) {
