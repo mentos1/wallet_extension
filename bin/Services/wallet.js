@@ -130,7 +130,10 @@ const sendTransaction = async function (pk, to, amount) {
             return {status : 0, msg : "Send status fail."};
         }
     } catch (err) {
+        console.error('________!___________');
+        console.error(err.status, err.transactionHash);
         console.error("Error Sending in makeTx", err);
+        console.error('________!___________');
         return {status : 0, msg : err};
     }
 }
