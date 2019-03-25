@@ -70,8 +70,6 @@ function jsonToParams(json_data) {
 
 
 const TwitterClient = require('easy-twitter');
-const twitter_api = require('twitter');
-
 //_Create a new Twitter app and get the keys needed
 
 
@@ -121,43 +119,7 @@ async function getFollowersList(twitterAccount, access_token_key = null, access_
     // data.user : 'iAmAlphaZz' in this case
 }
 
-function sendMsg(recipient_id, text, access_token_key = null, access_token_secret = null) {
-
-/*    const client = new twitter_api({
-        consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
-        consumer_secret: "rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra",
-        access_token_key: access_token_key ? access_token_key : "1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw",
-        access_token_secret: access_token_secret ? access_token_secret : "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"
-    });
-
-    return new Promise(function (resolve, reject) {
-        client.post('direct_messages/events/new', {
-            "event": {
-                "type": "message_create",
-                "message_create": {
-                    "target": {
-                        "recipient_id": recipient_id
-                    },
-                    "message_data": {
-                        "text": text,
-                    }
-                }
-            }
-        }, function (err, tweet, res) {
-            console.error('err', err);
-            if (err) {
-                reject(err);
-                return -1;
-            }
-            console.error(tweet);
-            resolve(tweet);
-            return 0;
-        });
-    });*/
-
-
-    var request = require('request')
-
+async function sendMsg(recipient_id, text, access_token_key = null, access_token_secret = null) {
 // twitter authentication
     var twitter_oauth = {
         consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
@@ -218,14 +180,13 @@ function sendMsg(recipient_id, text, access_token_key = null, access_token_secre
     }
 
 // POST request to send Direct Message
-    request.post(request_options, function (error, response, body) {
-        console.log('error');
-        console.log(error);
-        console.log('body');
-        console.log(body);
-        console.log('response');
-        console.log(response);
-    })
+    try {
+        await request.post(request_options);
+        return true;
+    } catch (e) {
+        console.error(e);
+        return false;
+    }
 }
 
 

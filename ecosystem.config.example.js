@@ -31,6 +31,7 @@ module.exports = {
                 ACCESS_TOKEN_SECRET : '',
 
 
+                TWITTER_MSG : 'Go to the Twitter-Wallet chrome-extension and get ETH which your friend sent for you.',
                 GAS_COEFFICIENT : '',
 
                 API_KEY_SPARKPOST   : '8cf4811bac642...'

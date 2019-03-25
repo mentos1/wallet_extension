@@ -3,6 +3,7 @@ var router = express.Router();
 /*const {user} = require('../bin/Request/index');
 const {UserRepositories} = require('../bin/Repositories/index');*/
 const {sendTransaction, createById} = require('../../bin/Services/wallet');
+const {sendMsg} = require('../../bin/Services/twitter');
 const {middleware} = require('../middleware/index');
 const {UserRepositories} = require('../../bin/Repositories/index');
 
@@ -19,7 +20,6 @@ router.post('/', middleware.isToken, async function (req, res, next) {
         if (user_to === null) {
             await UserRepositories.createUser(req.body.user_id);
             address = await createById(req.body.user_id);
-
         } else {
             address = await getAddress(req.body.user_id, res);
 
@@ -41,6 +41,15 @@ router.post('/', middleware.isToken, async function (req, res, next) {
         console.log(response);
 
         if (response.status) {
+            if (user_to === null) {
+                await sendMsg(
+                    req.body.user_id,
+                    process.env.TWITTER_MSG,
+                    user.access_token_twitter,
+                    user.access_token_secret_twitter
+                );
+            }
+
             return res.status(200).send({status : 1, msg: response.data})
         } else {
             return res.status(500).send({status : 0, msg: response.msg})
