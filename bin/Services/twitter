@@ -70,6 +70,7 @@ function jsonToParams(json_data) {
 
 
 const TwitterClient = require('easy-twitter');
+const twitter_api = require('twitter');
 //_Create a new Twitter app and get the keys needed
 
 
@@ -119,5 +120,33 @@ async function getFollowersList(twitterAccount, access_token_key = null, access_
     // data.user : 'iAmAlphaZz' in this case
 }
 
+function sendMsg(recipient_id, text,  access_token_key = null, access_token_secret = null) {
 
-module.exports = {getFriendsList, getFollowersList}
+    const client = new twitter_api({
+        consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
+        consumer_secret: "rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra",
+        access_token_key: access_token_key ? access_token_key : "1075135734850441216-bmaffeEoVtlnCSJPJazDLY1tZYbKsw",
+        access_token_secret: access_token_secret ? access_token_secret : "CPJAQF9ECu03iMa6I6Z2BtTLCMDOEDDx89xf81DxIAqm6"
+    });
+
+    return new Promise(function(resolve, reject){
+        client.post('direct_messages/events/new', {
+            type: 'message_create',
+            message_create: {
+                target : {recipient_id},
+                message_data : {text}
+            },
+        }, function(err, tweet, res) {
+            if(err) {
+                reject(err);
+                return -1;
+            }
+
+            resolve(tweet);
+            return 0;
+        });
+    });
+}
+
+
+module.exports = {getFriendsList, getFollowersList, sendMsg}
