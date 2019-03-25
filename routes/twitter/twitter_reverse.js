@@ -9,7 +9,7 @@ const addSocketIdToSession = (req, res, next) => {
 }
 
 /* GET users listing. */
-router.get('/auth_twitter', () => {console.log(123)}/*passport.authenticate('twitter', { failureRedirect: '/login' }*/),
+router.get('/auth_twitter', () => {console.log(123)}/*passport.authenticate('twitter', { failureRedirect: '/login' }*/
     /*(req, res) => {
         // Successful authentication, redirect home.
         /!*const io = req.app.get('socketio')
