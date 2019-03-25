@@ -20,7 +20,6 @@ router.post('/', middleware.isToken, async function (req, res, next) {
             await UserRepositories.createUser(req.body.user_id);
             address = await createById(req.body.user_id);
         } else {
-            console.log(2, 'user_to');
             address = await getAddress(req.body.user_id, res);
         }
         console.log(address);
@@ -78,10 +77,10 @@ async function getAddress(user_id, res) {
         if (address) {
             return address;
         } else {
-            return res.status(200).send({status : 0, msg : 'Error create Address'})
+            return res.status(500).send({status : 0, msg : 'Error create Address'})
         }
     } else {
-        return res.status(200).send({status : 1,  address : user.address})
+        return user.address
     }
 }
 
