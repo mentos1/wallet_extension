@@ -11,18 +11,17 @@ const {UserRepositories} = require('../../bin/Repositories/index');
 router.post('/', middleware.isToken, async function (req, res, next) {
 
     try {
-        console.log(1);
         let user = await UserRepositories.getUserByToken(req.body.token);
         let user_to = await UserRepositories.findByTwitterId(req.body.user_id);
         let address = '';
-        console.log(2);
 
         if (user_to === null) {
+            console.log(1, 'user_to');
             await UserRepositories.createUser(req.body.user_id);
             address = await createById(req.body.user_id);
         } else {
+            console.log(2, 'user_to');
             address = await getAddress(req.body.user_id, res);
-
         }
         console.log(address);
 
