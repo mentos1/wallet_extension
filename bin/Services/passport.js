@@ -45,6 +45,11 @@ module.exports = function () {
             }
 
             let user = await UserRepositories.findByTwitterId(profile.id);
+
+            if (user.token !== token) {
+                await UserRepositories.updateToken(profile.id, token);
+            }
+
             let err = null;
             console.log('_______________________---');
             console.log(user);

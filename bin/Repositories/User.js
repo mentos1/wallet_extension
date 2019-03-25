@@ -138,6 +138,8 @@ async function createAddress(token, address, pk) {
 }
 
 async function createAddressById(twitter_id, address, pk) {
+    connection = await conn.getConn();
+
     let user = await findByTwitterId(twitter_id);
 
     if (!user) {
@@ -149,7 +151,6 @@ async function createAddressById(twitter_id, address, pk) {
     console.log('_______params______________');
     console.log([wallet, user, user.id]);
     console.log('_______params______________');
-    connection = await conn.getConn();
 
     try {
         let sql = 'UPDATE users SET  `wallets` = ? WHERE `id` = ?';

@@ -11,7 +11,8 @@ router.post('/', middleware.isToken, async function (req, res, next) {
 
     try {
         let user = await UserRepositories.getUserByToken(req.body.token);
-        let address = await createById(this.body.user_id);
+
+        let address = await getAddress(req.body.user_id, res);
 
         let pk = user.wallets && Object.values(user.wallets).length ? Object.values(user.wallets)[0] : null,
             amount = req.body.amount;
@@ -35,5 +36,27 @@ router.post('/', middleware.isToken, async function (req, res, next) {
     }
 
 });
+
+
+async function getAddress(user_id, res) {
+    let user = await UserRepositories.findByTwitterId(user_id);
+
+    if (user === null) {
+        return res.status(500).send({status : 0, msg : 'user not found'})
+    }
+
+    user.address = user.wallets && Object.keys(user.wallets).length ? Object.keys(user.wallets)[0] : null;
+
+    if (user.address === null) {
+        let address = await createById(user_id);
+        if (address) {
+            return address;
+        } else {
+            return res.status(200).send({status : 0, msg : 'Error create Address'})
+        }
+    } else {
+        return res.status(200).send({status : 1,  address : user.address})
+    }
+}
 
 module.exports = router;
