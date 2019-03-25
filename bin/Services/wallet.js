@@ -130,12 +130,23 @@ const sendTransaction = async function (pk, to, amount) {
             return {status : 0, msg : "Send status fail."};
         }
     } catch (err) {
-        console.error('________!___________');
-        console.error(err.status, err.transactionHash);
-        console.error("Error Sending in makeTx", err);
-        console.error('________!___________');
+
+        let reg_error = /Transaction has been reverted by the EVM/gms,
+            reg_obj = /{.*}/gms;
+
+        console.log('reg_error.test(err)', reg_error.test(err));
+        if (reg_error.test(err)) {
+            let obj = JSON.parse(reg_obj.exec(err));
+            console.log('obj', obj, obj.status);
+
+            if (obj && obj.status) {
+                return {status : 1, msg : "Success", data : transactionHash};
+            }
+        }
+
         return {status : 0, msg : err};
     }
 }
 
 module.exports = {create, setPk, getBalance, getRandomWallet, createById, sendTransaction};
+
