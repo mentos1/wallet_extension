@@ -35,6 +35,33 @@ async function create(profile, token, tokenSecret) {
 
 }
 
+async function createUser(id_twitter) {
+    connection = await conn.getConn();
+    const sql = 'INSERT INTO users (`id_twitter`, `created_at`, `updated_at`) VALUES (?,?,?)';
+
+    let array = [
+        id_twitter,
+        new Date(),
+        new Date(),
+    ];
+
+    try {
+        let response = await connection.execute(
+            sql,
+            array
+        );
+
+        console.error('___________-response_________________')
+        console.log(response)
+        console.error('___________-response_________________')
+        return true;
+    } catch (e) {
+        console.log('Error insert : ', e);
+        return false;
+    }
+
+}
+
 async function has(id_twitter) {
     connection = await conn.getConn();
 
@@ -74,7 +101,13 @@ async function findById(id) {
         console.error(err);
     }
 
-    return [...rows];
+    let users = [...rows]
+
+    if (users.length) {
+        return users[0];
+    } else {
+        return null;
+    }
 }
 
 async function findByTwitterId(id) {
@@ -226,6 +259,7 @@ module.exports = {
     findById,
     getAll,
     create,
+    createUser,
     has,
     findByTwitterId,
     updateToken,
