@@ -38,9 +38,10 @@ router.post('/', middleware.isToken, async function (req, res, next) {
 
         let response = await sendTransaction(pk, address, amount);
 
-        console.log(response);
+        console.log('response sendTransaction', response);
 
         if (response.status) {
+            console.log('user_to === null', user_to === null)
             if (user_to === null) {
                 await sendMsg(
                     req.body.user_id,

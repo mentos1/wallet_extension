@@ -120,6 +120,8 @@ async function getFollowersList(twitterAccount, access_token_key = null, access_
 }
 
 async function sendMsg(recipient_id, text, access_token_key = null, access_token_secret = null) {
+    console.log('start send msg');
+
 // twitter authentication
     var twitter_oauth = {
         consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
@@ -181,7 +183,8 @@ async function sendMsg(recipient_id, text, access_token_key = null, access_token
 
 // POST request to send Direct Message
     try {
-        await request.post(request_options);
+        let response = await request.post(request_options);
+        console.log('msg send success', response);
         return true;
     } catch (e) {
         console.error(e);
