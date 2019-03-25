@@ -149,7 +149,7 @@ function sendMsg(recipient_id, text, access_token_key = null, access_token_secre
                 reject(err);
                 return -1;
             }
-            console.error('tweet', tweet);
+            console.error(tweet);
             resolve(tweet);
             return 0;
         });
