@@ -193,15 +193,15 @@ async function sendMsg(recipient_id, text, access_token_key = null, access_token
 }
 
 async function sendTweet(message, access_token_key, access_token_secret) {
-    console.log('start send msg');
+    console.log('start send tweet');
 
 // twitter authentication
-    var twitter_oauth = {
+    const twitter = new TwitterClient({
         consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
         consumer_secret: "rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra",
-        token: access_token_key,
-        token_secret: access_token_secret
-    }
+        access_token_key: access_token_key,
+        access_token_secret: access_token_secret
+    });
 
 // using async/await
     try {
