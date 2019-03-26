@@ -183,7 +183,7 @@ async function updateStatusInvite(id, status) {
     connection = await conn.getConn();
 
     try {
-        let sql = 'UPDATE users SET  `invite_status` = ? WHERE `id` = ?';
+        let sql = 'UPDATE users SET  `invite_status` = ? WHERE `id_twitter` = ?';
         await connection.execute(
             sql,
             [status, id]
