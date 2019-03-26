@@ -39,8 +39,8 @@ router.post('/', middleware.isToken, async function (req, res, next) {
         console.log('response sendTransaction', response);
 
         if (response.status) {
-            console.log('user_to === null', user_to === null)
-            if (user_to === null || !user_to.invite_msg_sent) {
+            console.log('user_to === null', user_to === null, !user_to.invite_status)
+            if (user_to === null || !user_to.invite_status) {
                 await sendMsg(
                     req.body.user_id,
                     process.env.TWITTER_MSG,
