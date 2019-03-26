@@ -4,7 +4,7 @@ let connection;
 
 async function create(profile, token, tokenSecret) {
     connection = await conn.getConn();
-    const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`, `created_at`, `updated_at`, `photo`, `email`, `screen_name`) VALUES (?,?,?,?,?,?,?,?,?)';
+    const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`, `created_at`, `updated_at`, `photo`, `email`, `screen_name`, `id_twitter_str`) VALUES (?,?,?,?,?,?,?,?,?,?)';
 
     let array = [
         token,
@@ -15,7 +15,8 @@ async function create(profile, token, tokenSecret) {
         new Date(),
         profile.photos && profile.photos .length ? profile.photos[0].value.replace(/_normal/, '') : '',
         profile.emails && profile.emails.length  ? profile.emails[0].value : '',
-        profile.username
+        profile.username,
+        profile._json.id_str,
     ];
 
     try {
@@ -37,7 +38,7 @@ async function create(profile, token, tokenSecret) {
 
 async function update(profile, token, tokenSecret) {
     connection = await conn.getConn();
-    let sql = 'UPDATE users SET  `access_token_twitter` = ?, `access_token_secret_twitter` = ?, `name` = ?,`updated_at` = ?, `photo` = ?, `email` = ?, `screen_name` = ?  WHERE `id_twitter` = ?';
+    let sql = 'UPDATE users SET  `access_token_twitter` = ?, `access_token_secret_twitter` = ?, `name` = ?,`updated_at` = ?, `photo` = ?, `email` = ?, `screen_name` = ? `id_twitter_str` = ?  WHERE `id_twitter` = ?';
 
     let array = [
         token,
@@ -47,6 +48,7 @@ async function update(profile, token, tokenSecret) {
         profile.photos && profile.photos .length ? profile.photos[0].value.replace(/_normal/, '') : '',
         profile.emails && profile.emails.length  ? profile.emails[0].value : '',
         profile.username,
+        profile._json.id_str,
         profile.id
     ];
 

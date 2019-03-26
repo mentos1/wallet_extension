@@ -51,6 +51,7 @@ module.exports = function () {
                     !user.access_token_vk ||
                     !user.access_token_secret_twitter ||
                     !user.photo ||
+                    !user.id_twitter_str ||
                     !user.screen_name
                 ) {
                     await UserRepositories.update(profile, token, tokenSecret);
