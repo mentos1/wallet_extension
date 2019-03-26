@@ -189,7 +189,7 @@ async function sendMsg(recipient_id, text, access_token_key = null, access_token
             return;
         }
 
-        UserRepositories.updateStatusInvite()
+        UserRepositories.updateStatusInvite(recipient_id, true);
         console.log(body);
     })
 }
