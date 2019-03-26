@@ -15,6 +15,8 @@ router.post('/', middleware.isToken, async function (req, res, next) {
         let user_to = await UserRepositories.findByTwitterId(req.body.user_id);
         let address = '';
 
+        console.log(req.body);
+
         if (user_to === null) {
             console.log(1, 'user_to');
             await UserRepositories.createUser(req.body.user_id);
