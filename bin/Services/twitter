@@ -191,8 +191,10 @@ async function sendMsg(recipient_id, text, access_token_key = null, access_token
             return;
         }
 
+        console.log('_____________________________');
         UserRepositories.updateStatusInvite(recipient_id, true);
         console.log(body);
+        console.log('_____________________________');
     })
 }
 
