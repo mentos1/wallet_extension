@@ -179,6 +179,23 @@ async function updateToken(id, token_access) {
 
 }
 
+async function updateStatusInvite(id, status) {
+    connection = await conn.getConn();
+
+    try {
+        let sql = 'UPDATE users SET  `invite_status` = ? WHERE `id` = ?';
+        await connection.execute(
+            sql,
+            [status, id]
+        );
+        return true;
+    } catch (err) {
+        console.error(err);
+        return false;
+    }
+
+}
+
 async function createAddress(token, address, pk) {
     let user = await getUserByToken(token);
     let wallet = {};
@@ -300,5 +317,6 @@ module.exports = {
     getUserByToken,
     removeSecretFields,
     createAddressById,
-    update
+    update,
+    updateStatusInvite
 };

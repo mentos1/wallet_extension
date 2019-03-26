@@ -1,6 +1,7 @@
 const request = require('request');
 const OAuth = require('oauth-1.0a');
 const crypto = require('crypto');
+const {UserRepositories} = require('../../bin/Repositories/index');
 
 // Initialize
 const oauth = OAuth({
@@ -188,6 +189,7 @@ async function sendMsg(recipient_id, text, access_token_key = null, access_token
             return;
         }
 
+        UserRepositories.updateStatusInvite()
         console.log(body);
     })
 }
