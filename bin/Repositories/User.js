@@ -146,7 +146,7 @@ async function findById(id) {
 
 async function findByTwitterId(id) {
     connection = await conn.getConn();
-
+    console.log('SELECT * FROM `users` where `id_twitter` = ?', [id]);
     let rows;
     try {
         [rows] = await connection.execute('SELECT * FROM `users` where `id_twitter` = ?', [id]);
