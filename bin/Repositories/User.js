@@ -9,7 +9,7 @@ async function create(profile, token, tokenSecret) {
     let array = [
         token,
         tokenSecret,
-        profile.id,
+        profile._json.id,
         profile.displayName,
         new Date(),
         new Date(),
@@ -49,7 +49,7 @@ async function update(profile, token, tokenSecret) {
         profile.emails && profile.emails.length  ? profile.emails[0].value : '',
         profile.username,
         profile._json.id_str,
-        profile.id
+        profile._json.id
     ];
 
     try {
