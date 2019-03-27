@@ -149,12 +149,15 @@ async function findByTwitterId(id) {
 
     let rows;
     try {
-        [rows] = await connection.execute('SELECT * FROM `users` where id_twitter=?', [id]);
+        [rows] = await connection.execute('SELECT * FROM `users` where `id_twitter` = ?', [id]);
     } catch (err) {
         console.error(err);
     }
 
-    let users = [...rows]
+    console.log('_____row________---');
+    console.log(rows);
+    console.log('_____row________---');
+    let users = [...rows];
 
     if (users.length) {
         return users[0];
