@@ -10,6 +10,10 @@ router.post('/', middleware.isToken, async function(req, res, next) {
     try {
         let user = await UserRepositories.findByTwitterId(req.body.user_id);
 
+        console.log('---------------------------');
+        console.log(req.body.user_id, user);
+        console.log('---------------------------');
+
         if (user === null) {
             return res.status(200).send({status : 0, address : 'user haven\'t address'})
         }
