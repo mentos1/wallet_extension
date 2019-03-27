@@ -120,7 +120,7 @@ async function getFollowersList(twitterAccount, access_token_key = null, access_
     // data.user : 'iAmAlphaZz' in this case
 }
 
-async function sendMsg(recipient_id, text, access_token_key = null, access_token_secret = null) {
+async function sendMsg(user, text, access_token_key = null, access_token_secret = null) {
     console.log('start send msg');
 
 // twitter authentication
@@ -137,7 +137,7 @@ async function sendMsg(recipient_id, text, access_token_key = null, access_token
             "type": "message_create",
             "message_create": {
                 "target": {
-                    "recipient_id": recipient_id
+                    "recipient_id": user.id_str
                 },
                 "message_data": {
                     "text": text,
@@ -185,14 +185,14 @@ async function sendMsg(recipient_id, text, access_token_key = null, access_token
     }
 
 // POST request to send Direct Message
-    request.post(request_options, function (error, response, body) {
+    request.post(request_options, async function (error, response, body) {
         if (error) {
             console.error(error);
             return;
         }
 
         console.log('_____________________________');
-        UserRepositories.updateStatusInvite(recipient_id, true);
+        await UserRepositories.updateStatusInvite(user.user_id, true);
         console.log(body);
         console.log('_____________________________');
     })
