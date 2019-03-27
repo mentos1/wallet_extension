@@ -38,12 +38,12 @@ module.exports = function () {
             console.log(profile);
             console.log('__________profile_____________---');
 
-            let hasUser = await UserRepositories.has(profile.id);
+            let hasUser = await UserRepositories.has(profile._json.id);
 
             if (!hasUser) {
                 await UserRepositories.create(profile, token, tokenSecret);
             } else {
-                let user = await UserRepositories.findByTwitterId(profile.id);
+                let user = await UserRepositories.findByTwitterId(profile._json.id);
 
                 if (
                     !user.name ||
@@ -58,7 +58,7 @@ module.exports = function () {
                 }
             }
 
-            let user = await UserRepositories.findByTwitterId(profile.id);
+            let user = await UserRepositories.findByTwitterId(profile._json.id);
             let err = null;
             console.log('_______________________---');
             console.log(user);
