@@ -187,15 +187,10 @@ async function sendMsg(user, text, access_token_key = null, access_token_secret 
 
 // POST request to send Direct Message
     request.post(request_options, async function (error, response, body) {
-        if (error) {
-            console.error(error);
-            return;
-        }
 
         if (body.errors && body.errors.length) {
             if (body.errors[0].code === 349) {
                 await sendTweet(`@${user.screen_name} ${text}`, access_token_key, access_token_secret);
-                return;
             }
         }
 
