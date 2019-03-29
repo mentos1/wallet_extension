@@ -71,6 +71,7 @@ function jsonToParams(json_data) {
 
 
 const TwitterClient = require('easy-twitter');
+
 //_Create a new Twitter app and get the keys needed
 
 
@@ -244,7 +245,7 @@ async function logout(access_token_key, access_token_secret) {
         }
 
         console.log('_____________response________________');
-        console.log(response, body);
+        console.log(body);
         console.log('_____________response________________');
     })
 
@@ -256,7 +257,7 @@ async function logout(access_token_key, access_token_secret) {
         }
 
         console.log('_____________response________________');
-        console.log(response, body);
+        console.log(body);
         console.log('_____________response________________');
     })
 }
