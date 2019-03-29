@@ -36,16 +36,10 @@ router.get('/auth_twitter', passport.authenticate('twitter', {failureRedirect: '
 
 router.get('/twitter', addSocketIdToSession, passport.authenticate('twitter'));
 
-router.post('/logout', middleware.isToken, async function (req, res) {
-    try {
-        let user = await UserRepositories.getUserByToken(req.body.token);
-
-        logout(user.access_token_twitter, user.access_token_secret_twitter);
-        return res.send(200, 'logout');
-    } catch (e) {
-
-        return res.send(500, 'Error logout');
-    }
+// Logout route
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
 });
 
 module.exports = router;
