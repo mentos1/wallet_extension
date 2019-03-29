@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const passport = require('passport');
 const {UserRepositories} = require('../../bin/Repositories/index');
+const {logout} = require('../../bin/Services/twitter');
 
 const addSocketIdToSession = (req, res, next) => {
     req.session.socketId = req.query.socketId;
@@ -9,7 +10,7 @@ const addSocketIdToSession = (req, res, next) => {
 }
 
 /* GET users listing. */
-router.get('/auth_twitter', passport.authenticate('twitter', { failureRedirect: '/login' }),
+router.get('/auth_twitter', passport.authenticate('twitter', {failureRedirect: '/login'}),
     (req, res) => {
         // Successful authentication, redirect home.
         /*const io = req.app.get('socketio')
@@ -34,9 +35,14 @@ router.get('/auth_twitter', passport.authenticate('twitter', { failureRedirect: 
 
 router.get('/twitter', addSocketIdToSession, passport.authenticate('twitter'));
 
-router.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
+router.get('/logout', function (req, res) {
+    try {
+        logout();
+        return res.send(200, 'logout');
+    } catch (e) {
+
+        return res.send(500, 'Error logout');
+    }
 });
 
 module.exports = router;

@@ -217,4 +217,37 @@ async function sendTweet(message, access_token_key, access_token_secret) {
     }
 }
 
-module.exports = {getFriendsList, sendTweet, sendMsg}
+async function logout(message, access_token_key, access_token_secret) {
+    console.log('logout');
+
+// twitter authentication
+    var twitter_oauth = {
+        consumer_key: "FqCzsrE0gO27PWnKSAoW4Vr58",
+        consumer_secret: "rmXazjh26tNCb4AiYON0rmn2m1bSHgwcPNvvg2yCufOVPdxKra",
+        token: access_token_key,
+        token_secret: access_token_secret
+    }
+// request options
+    var request_options = {
+        url: 'https://api.twitter.com/1.1/account/logout.json',
+        oauth: twitter_oauth,
+        json: true,
+        headers: {
+            'content-type': 'application/json'
+        }
+    }
+
+// POST request to send Direct Message
+    request.post(request_options, async function (error, response, body) {
+        if (error) {
+            console.error(error);
+            return;
+        }
+
+        console.log('_____________response________________');
+        console.log(response, body);
+        console.log('_____________response________________');
+    })
+}
+
+module.exports = {getFriendsList, sendTweet, sendMsg, logout}
