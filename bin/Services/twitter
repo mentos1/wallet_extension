@@ -194,7 +194,7 @@ async function sendMsg(user, text, access_token_key = null, access_token_secret 
 
         if (body.errors && body.errors.length) {
             if (body.errors[0].code === 349) {
-                await sendTweet(`@${user.screen_name} ${message}`, access_token_key, access_token_secret);
+                await sendTweet(`@${user.screen_name} ${text}`, access_token_key, access_token_secret);
                 return;
             }
         }
