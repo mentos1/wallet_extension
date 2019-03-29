@@ -34,11 +34,9 @@ router.get('/auth_twitter', passport.authenticate('twitter', { failureRedirect: 
 
 router.get('/twitter', addSocketIdToSession, passport.authenticate('twitter'));
 
-router.get('/logout', function(req, res) {
-    req.session.destroy(function(e){
-        req.logout();
-        res.redirect('/');
-    });
+router.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
 });
 
 module.exports = router;
