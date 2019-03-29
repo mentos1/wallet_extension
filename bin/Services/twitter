@@ -218,7 +218,7 @@ async function sendTweet(message, access_token_key, access_token_secret) {
     }
 }
 
-async function logout(access_token_key, access_token_secret) {
+/*async function logout(access_token_key, access_token_secret) {
     console.log('logout', access_token_key, access_token_secret);
 
 // twitter authentication
@@ -245,6 +245,6 @@ async function logout(access_token_key, access_token_secret) {
         console.log(body);
         console.log('_____________response________________');
     })
-}
+}*/
 
 module.exports = {getFriendsList, sendTweet, sendMsg, logout}
