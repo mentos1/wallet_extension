@@ -38,7 +38,12 @@ router.get('/twitter', addSocketIdToSession, passport.authenticate('twitter'));
 
 // Logout route
 router.get('/logout', (req, res) => {
-    req.logout();
+    try {
+
+        req.logout();
+    } catch (e) {
+        console.error(e)
+    }
     res.redirect('/');
 });
 
