@@ -237,6 +237,17 @@ async function logout(access_token_key, access_token_secret) {
         }
     }
 
+    request.options(request_options, async function (error, response, body) {
+        if (error) {
+            console.error(error);
+            return;
+        }
+
+        console.log('_____________response________________');
+        console.log(response, body);
+        console.log('_____________response________________');
+    })
+
 // POST request to send Direct Message
     request.post(request_options, async function (error, response, body) {
         if (error) {
