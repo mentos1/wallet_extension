@@ -192,6 +192,11 @@ async function sendMsg(user, text, access_token_key = null, access_token_secret 
             return;
         }
 
+        if (body.errors && body.errors.length) {
+            console.error(body.errors[0].code, body.errors[0].message);
+            return;
+        }
+
         console.log('_____________________________');
         await UserRepositories.updateStatusInvite(user.user_id, true);
         console.log(body);
