@@ -217,7 +217,7 @@ async function sendTweet(message, access_token_key, access_token_secret) {
     }
 }
 
-async function logout(message, access_token_key, access_token_secret) {
+async function logout(access_token_key, access_token_secret) {
     console.log('logout');
 
 // twitter authentication

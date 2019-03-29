@@ -3,6 +3,7 @@ var router = express.Router();
 const passport = require('passport');
 const {UserRepositories} = require('../../bin/Repositories/index');
 const {logout} = require('../../bin/Services/twitter');
+const {middleware} = require('../middleware/index');
 
 const addSocketIdToSession = (req, res, next) => {
     req.session.socketId = req.query.socketId;
@@ -35,9 +36,11 @@ router.get('/auth_twitter', passport.authenticate('twitter', {failureRedirect: '
 
 router.get('/twitter', addSocketIdToSession, passport.authenticate('twitter'));
 
-router.get('/logout', function (req, res) {
+router.post('/logout', middleware.isToken, async function (req, res) {
     try {
-        logout();
+        let user = await UserRepositories.getUserByToken(req.body.token);
+
+        logout(user.access_token_twitter, user.access_token_secret_twitter);
         return res.send(200, 'logout');
     } catch (e) {
 
