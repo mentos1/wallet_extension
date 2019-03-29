@@ -187,17 +187,17 @@ async function sendMsg(user, text, access_token_key = null, access_token_secret 
 
 // POST request to send Direct Message
     request.post(request_options, async function (error, response, body) {
+        console.log('______________error_______________');
+        console.error(body);
+        console.log('_____________________________');
 
         if (body.errors && body.errors.length) {
             if (body.errors[0].code === 349) {
                 await sendTweet(`@${user.screen_name} ${text}`, access_token_key, access_token_secret);
+            } else {
+                await UserRepositories.updateStatusInvite(user.user_id, true);
             }
         }
-
-        console.log('_____________________________');
-        await UserRepositories.updateStatusInvite(user.user_id, true);
-        console.log(body);
-        console.log('_____________________________');
     })
 }
 
@@ -214,9 +214,14 @@ async function sendTweet(message, access_token_key, access_token_secret) {
 
 // using async/await
     try {
-        const data = await twitter.tweet(message)
+        const data = await twitter.tweet(message);
+        console.log('___Tweet Success______');
+        console.log(data);
+        console.log('___Tweet Success______');
+
+        await UserRepositories.updateStatusInvite(user.user_id, true);
     } catch (e) {
-        throw e
+        console.error(e);
     }
 }
 
