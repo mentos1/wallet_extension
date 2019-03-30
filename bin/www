@@ -32,7 +32,7 @@ var options = {
 
 var server_http = http.createServer(app);
 var server_https = https.createServer(options, app);
-var socket = https.createServer(options, app);
+//var socket = https.createServer(options, app);
 var passportConfig = require('./Services/passport');
 
 /**
@@ -53,7 +53,7 @@ server_https.on('listening', async () => {
 
 
 //soket
-const socketio = require('socket.io');
+//const socketio = require('socket.io');
 var twitter_reverse = require('../routes/twitter/twitter_reverse');
 //var auth_twitter = require('./routes/auth_twitter');
 var auth_vk = require('../routes/auth_vk');
@@ -66,7 +66,7 @@ var get_user_friends = require('../routes/user/getFriends');
 var get_user_address = require('../routes/user/getUserAddress');
 var send_eth = require('../routes/wallet/sendEth');
 
-const io = socketio(socket);
+//const io = socketio(socket);
 
 /*io.sockets.on('connection', function (socket) {
     console.log('client connect');
@@ -76,7 +76,7 @@ const io = socketio(socket);
     });*!/
 });*/
 
-app.set('socketio', io);
+//app.set('socketio', io);
 
 
 //app.use('/auth_vk', auth_vk);
