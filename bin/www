@@ -109,9 +109,9 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-socket.listen(8080, () => {
+/*socket.listen(8080, () => {
     console.log('listening... 8080')
-});
+});*/
 
 
 /**
