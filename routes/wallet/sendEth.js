@@ -44,6 +44,7 @@ router.post('/', middleware.isToken, async function (req, res, next) {
             console.log('user_to', user_to, user_to === null);
 
             if (user_to === null || !user_to.invite_status) {
+
                 await sendMsg(
                     req.body,
                     process.env.TWITTER_MSG,

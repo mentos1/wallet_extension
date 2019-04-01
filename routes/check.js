@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const {sendMsg} = require('../bin/Services/twitter');
 
 
 /* GET home page. */
