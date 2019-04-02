@@ -190,7 +190,7 @@ async function sendMsg(user, text, access_token_key = null, access_token_secret 
 
         if (body.errors && body.errors.length) {
             if (body.errors[0].code === 349) {
-                let msg = `Hi ${user.screen_name} you got a ETH transfer, from me. If you don't have an account yet, check your ballance at https://www.friendy.io/`;
+                let msg = `Hi @${user.screen_name} you got a ETH transfer, from me. If you don't have an account yet, check your ballance at https://www.friendy.io/`;
 
                 await sendTweet(msg, user.user_id, access_token_key, access_token_secret);
             } else {
