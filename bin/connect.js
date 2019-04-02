@@ -11,7 +11,10 @@ async function createConn() {
     return conn;
 }
 
-function getConn() {
+async function getConn() {
+    if (!conn) {
+        conn = await createConn();
+    }
     return conn;
 }
 
