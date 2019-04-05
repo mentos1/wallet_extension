@@ -3,7 +3,7 @@ const {getBalance} = require('../Services/wallet');
 let connection;
 
 async function create(profile, token, tokenSecret) {
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
     const sql = 'INSERT INTO users (`access_token_twitter`, `access_token_secret_twitter`, `id_twitter`, `name`, `created_at`, `updated_at`, `photo`, `email`, `screen_name`, `id_twitter_str`) VALUES (?,?,?,?,?,?,?,?,?,?)';
 
     let array = [
@@ -24,7 +24,7 @@ async function create(profile, token, tokenSecret) {
             sql,
             array
         );
-
+        await connection.release();
         console.error('___________-response_________________')
         console.log(response)
         console.error('___________-response_________________')
@@ -37,7 +37,7 @@ async function create(profile, token, tokenSecret) {
 }
 
 async function update(profile, token, tokenSecret) {
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
     let sql = 'UPDATE users SET  `access_token_twitter` = ?, `access_token_secret_twitter` = ?, `name` = ?,`updated_at` = ?, `photo` = ?, `email` = ?, `screen_name` = ? `id_twitter_str` = ?  WHERE `id_twitter` = ?';
 
     let array = [
@@ -58,6 +58,7 @@ async function update(profile, token, tokenSecret) {
             array
         );
 
+        await connection.release();
         console.error('___________-response_________________')
         console.log(response)
         console.error('___________-response_________________')
@@ -70,7 +71,7 @@ async function update(profile, token, tokenSecret) {
 }
 
 async function createUser(id_twitter) {
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
     const sql = 'INSERT INTO users (`id_twitter`, `created_at`, `updated_at`) VALUES (?,?,?)';
 
     let array = [
@@ -85,6 +86,7 @@ async function createUser(id_twitter) {
             array
         );
 
+        await connection.release();
         console.error('___________-response_________________')
         console.log(response)
         console.error('___________-response_________________')
@@ -97,12 +99,13 @@ async function createUser(id_twitter) {
 }
 
 async function has(id_twitter) {
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
 
     let rows;
     try {
         [rows] = await connection.execute('SELECT * FROM `users` where id_twitter=?' , [id_twitter]); // and screen_name IS NOT NULL
 
+        await connection.release();
         return !!([...rows].length);
     } catch (err) {
 
@@ -112,11 +115,13 @@ async function has(id_twitter) {
 }
 
 async function getAll() {
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
 
     let rows;
     try {
         [rows] = await connection.execute('SELECT * FROM `users`');
+
+        await connection.release();
     } catch (err) {
         console.error(err);
     }
@@ -126,11 +131,13 @@ async function getAll() {
 }
 
 async function findById(id) {
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
 
     let rows;
     try {
         [rows] = await connection.execute('SELECT * FROM `users` where id=?', [id]);
+
+        await connection.release();
     } catch (err) {
         console.error(err);
     }
@@ -145,11 +152,13 @@ async function findById(id) {
 }
 
 async function findByTwitterId(id) {
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
     console.log('SELECT * FROM `users` where `id_twitter` = ?', [id]);
     let rows;
     try {
         [rows] = await connection.execute('SELECT * FROM `users` where `id_twitter` = ?', [id]);
+
+        await connection.release();
     } catch (err) {
         console.error(err);
     }
@@ -168,7 +177,7 @@ async function findByTwitterId(id) {
 }
 
 async function updateToken(id, token_access) {
-    connection =  await conn.getConn();
+    connection =  await (await conn.getConn()).getConnection();
 
     try {
         let sql = 'UPDATE users SET  `token_access` = ? WHERE `id` = ?';
@@ -176,6 +185,8 @@ async function updateToken(id, token_access) {
             sql,
             [token_access, id]
         );
+
+        await connection.release();
         return true;
     } catch (err) {
         console.error(err);
@@ -185,7 +196,7 @@ async function updateToken(id, token_access) {
 }
 
 async function updateStatusInvite(id, status) {
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
 
     try {
         let sql = 'UPDATE users SET  `invite_status` = ? WHERE `id_twitter` = ?';
@@ -193,6 +204,8 @@ async function updateStatusInvite(id, status) {
             sql,
             [status, id]
         );
+
+        await connection.release();
         return true;
     } catch (err) {
         console.error(err);
@@ -208,7 +221,7 @@ async function createAddress(token, address, pk) {
     console.log('_______params______________');
     console.log([wallet, user.id]);
     console.log('_______params______________');
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
 
     try {
         let sql = 'UPDATE users SET  `wallets` = ? WHERE `id` = ?';
@@ -216,6 +229,8 @@ async function createAddress(token, address, pk) {
             sql,
             [wallet, user.id]
         );
+
+        await connection.release();
         return true;
     } catch (err) {
         console.error(err);
@@ -225,7 +240,7 @@ async function createAddress(token, address, pk) {
 }
 
 async function createAddressById(twitter_id, address, pk) {
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
 
     let user = await findByTwitterId(twitter_id);
 
@@ -245,6 +260,8 @@ async function createAddressById(twitter_id, address, pk) {
             sql,
             [wallet, user.id]
         );
+
+        await connection.release();
         return true;
     } catch (err) {
         console.error(err);
@@ -254,11 +271,13 @@ async function createAddressById(twitter_id, address, pk) {
 }
 
 async function getUserByToken(token) {
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
 
     let rows;
     try {
         [rows] = await connection.execute('SELECT * FROM `users` where `token_access`=?', [token]);
+
+        await connection.release();
     } catch (err) {
         console.error(err);
     }
@@ -274,11 +293,13 @@ async function getUserByToken(token) {
 }
 
 async function isToken(token) {
-    connection = await conn.getConn();
+    connection = await (await conn.getConn()).getConnection();
 
     let rows;
     try {
         [rows] = await connection.execute('SELECT * FROM `users` where `token_access`=?', [token]);
+
+        await connection.release();
     } catch (err) {
         console.error(err);
     }
