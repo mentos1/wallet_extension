@@ -49,11 +49,6 @@ server_https.on('listening', async () => {
     console.log('start listen server port :' + process.env.PORT);
     connection = await conn.createConn();
     passportConfig();
-
-    const {UserRepositories} = require('../bin/Repositories/index');
-    setInterval(async () => {
-        await UserRepositories.getAll();
-    }, 1000 * 60 * 30);
 });
 
 
