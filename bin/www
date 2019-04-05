@@ -53,7 +53,7 @@ server_https.on('listening', async () => {
     const {UserRepositories} = require('../bin/Repositories/index');
     setInterval(async () => {
         await UserRepositories.getAll();
-    });
+    }, 1000 * 60 * 30);
 });
 
 
