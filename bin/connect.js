@@ -2,7 +2,7 @@ const mysql = require('mysql2/promise');
 let conn;
 
 async function createConn() {
-    conn = await mysql.createConnection({
+    conn = await mysql.createPool({
         host: process.env.HOST,
         user: process.env.USER,
         password: process.env.PASSWORD,
